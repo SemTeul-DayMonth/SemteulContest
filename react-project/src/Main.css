@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500&display=swap');
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  background-color: #F7F5FD;
+}
+
+.app {
+  height: 100%;
+  display: grid;
+  grid-template-areas:
+    "nav nav"
+    "main todayToDo";
+  grid-template-columns: 900px 280px;
+  grid-template-rows: 60px 1fr;
+  overflow: hidden;
+}
+
+/* nav */
+.nav {
+  grid-area: nav;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.mainLogo {
+  font-size: 23px;
+  margin-left: 40px;
+  margin-right: 25px;
+}
+
+.searchBar{
+  width: 470px;
+  height: 35px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-shadow: 0px 0px 4px 2px rgb(233, 233, 233);
+  background-color: white;
+}
+
+.search{
+  border: 0;
+  width: 320px;
+  margin-left: 10px;
+}
+
+.search::placeholder{
+  color: #7B68EE;
+  font-size: 15px;
+}
+
+.search:focus {
+  outline: 0;
+}
+
+.searchIcon{
+  margin-left: 12px;
+}
+
+.magni{
+  object-fit: contain;
+  width: 100%;
+  height:20px;
+}
+
+/* main */
+.main {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+  margin: 10px 60px 40px 40px;
+  box-shadow: 0px 0px 10px 2px rgb(237 237 237);
+}
+
+/* 
+.login, .join {
+  display: flex;
+  width: 100px;
+  height: 40px;
+  margin-top: 10px;
+  margin-right: 10px;
+  align-items: center;
+  justify-content: center;
+  background-color: gray;
+  text-decoration: none;
+  color: black;
+  box-shadow: 2px 2px 7px 1px #c8c8c8;
+} */
+
+.login {
+  
+}
+
+.join {
+
+}
+
+/* .main calender */
+.cal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0;
+  font-family: "NotoSansR";
+}
+
+.cal_nav {
+  height: 30px;
+  width: 800px;
+  font-weight: 500;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cal_nav div:hover {
+  cursor: pointer;
+}
+
+.cal_nav div {
+  font-size: 20px;
+  font-weight: 100;
+  margin: 0 40px;
+}
+
+.cal .year, .cal .month {
+  margin: 0;
+  text-align: center;
+}
+
+.cal .year {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.cal .month {
+  font-size: 30px;
+}
+
+.cal_days {
+  width: 800px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.cal_days .day {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% / 7);
+  height: calc(350px / 7);
+  font-size: 13px;
+  border-radius:5px;
+}
+
+.cal_days .day a:hover {
+  cursor: pointer;
+}
+
+.cal_days .otherMon {
+  color: rgb(146, 146, 146);
+}
+
+.cal_days .day:nth-child(7n) {
+  color: #486ed7;
+}
+
+.cal_days .day:nth-child(7n+1) {
+  color: #db5178;
+}
+
+
+/* to-do */
+.todayToDo{
+  grid-area: todayToDo;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.todoTitle{
+  font-size: 20px;
+  margin-left: 8px;
+}
+
+.toDoList{
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.toDoList div{
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.toDoList a{
+  color: black;
+  text-decoration: none;
+}
