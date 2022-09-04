@@ -148,10 +148,30 @@ html, body, #root {
 }
 
 .cal_days {
+  height: 330px;
   width: 800px;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cal_days .dayOfWeek {
+  width: 770px;
+  display: flex;
+}
+
+.cal_days .week {
+  width: 770px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.cal_days .week:hover {
+  background-color: rgb(242, 242, 242);
 }
 
 .cal_days .day {

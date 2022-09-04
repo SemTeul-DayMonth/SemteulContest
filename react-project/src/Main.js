@@ -35,32 +35,36 @@ function Main() {
   const totalDate = new Date(year, month, 0).getDate();
   const prevTotalDate = new Date(year, month-1, 0).getDate();
   const firstDay = new Date(year, month - 1, 1).getDay();
-  const days = [];
+  const days = [[], [], [], [], [], []];
+  let count = 0;
 
   for (let i=prevTotalDate-firstDay+1; i<=prevTotalDate; i++) {
       const date = {
           day: i,
           selectedMon: false,
-          selectedAssignDay: 0<=selectedAssign && (assignStart[selectedAssign][0] <= month && month-1 <= assignEnd[selectedAssign][0]) && (assignStart[selectedAssign][1] <= i && i <= assignEnd[selectedAssign][1]) ? true : false,
+          isSelectedAssignPeriod: 0<=selectedAssign && (assignStart[selectedAssign][0] <= month && month-1 <= assignEnd[selectedAssign][0]) && (assignStart[selectedAssign][1] <= i && i <= assignEnd[selectedAssign][1]) ? true : false,
           // 0<=selectedAssign 이면 과제가 선택됨, selectedAssign은 과제리스트의 인덱스 역할, assignStart[0]은 월 [1]은 일
       }
-      days.push(date);
+      days[parseInt(count/7)].push(date);
+      count += 1;
   }
   for (let i=1; i<=totalDate; i++) {
       const date = {
           day: i,
           selectedMon: true,
-          selectedAssignDay: 0<=selectedAssign && (assignStart[selectedAssign][0] <= month && month <= assignEnd[selectedAssign][0]) && (assignStart[selectedAssign][1] <= i && i <= assignEnd[selectedAssign][1]) ? true : false,
+          isSelectedAssignPeriod: 0<=selectedAssign && (assignStart[selectedAssign][0] <= month && month <= assignEnd[selectedAssign][0]) && (assignStart[selectedAssign][1] <= i && i <= assignEnd[selectedAssign][1]) ? true : false,
       }
-      days.push(date);
+      days[parseInt(count/7)].push(date);
+      count += 1;
   }
   for (let i=1; i<=42-(totalDate+firstDay); i++) {
       const date = {
           day: i,
           selectedMon: false,
-          selectedAssignDay: 0<=selectedAssign && (assignStart[selectedAssign][0] <= month && month+1 <= assignEnd[selectedAssign][0]) && (assignStart[selectedAssign][1] <= i && i <= assignEnd[selectedAssign][1]) ? true : false,
+          isSelectedAssignPeriod: 0<=selectedAssign && (assignStart[selectedAssign][0] <= month && month+1 <= assignEnd[selectedAssign][0]) && (assignStart[selectedAssign][1] <= i && i <= assignEnd[selectedAssign][1]) ? true : false,
       }
-      days.push(date);
+      days[parseInt(count/7)].push(date);
+      count += 1;
   }
 
   const [clickedDay, setClickedDay] = useState(-1);
@@ -121,21 +125,31 @@ function Main() {
               <div onClick={next_mon}>&gt;</div>
           </div>
           <div className="cal_days">
-            <div className="day">SUN</div>
-            <div className="day">MON</div>
-            <div className="day">TUE</div>
-            <div className="day">WED</div>
-            <div className="day">THU</div>
-            <div className="day">FRI</div>
-            <div className="day">SAT</div>
-            {days.map((date, index) => (
-              <div className={"day " + 
-                  (date.selectedMon ? "" : "otherMon ") + 
-                  (date.selectedAssignDay ? "selectedAssignDay" : "")} 
-                  key={index}>
-                  <a>{date.day}</a>
-              </div>
-            ))}
+            <div className='dayOfWeek'>
+              <div className="day">SUN</div>
+              <div className="day">MON</div>
+              <div className="day">TUE</div>
+              <div className="day">WED</div>
+              <div className="day">THU</div>
+              <div className="day">FRI</div>
+              <div className="day">SAT</div>
+            </div>
+            
+            {
+              days.map((week, key) => (
+                <div className='week' key={key}>
+                  {
+                    week.map((date, key) => (
+                      <div className={"day " + 
+                          (date.selectedMon ? "" : "otherMon ")} 
+                          key={key}>
+                          <a>{date.day}</a>
+                      </div>
+                    ))
+                  }
+                </div>
+              ))
+            }
           </div>
         </div> 
       </div>
