@@ -1,10 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500&display=swap");
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   margin: 0;
-  font-family: 'IBM Plex Sans KR', sans-serif;
-  background-color: #F7F5FD;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  background-color: #f7f5fd;
 }
 
 .app {
@@ -34,7 +36,7 @@ html, body, #root {
   margin-right: 25px;
 }
 
-.searchBar{
+.searchBar {
   width: 470px;
   height: 35px;
   display: flex;
@@ -44,14 +46,14 @@ html, body, #root {
   background-color: white;
 }
 
-.search{
+.search {
   border: 0;
   width: 320px;
   margin-left: 10px;
 }
 
-.search::placeholder{
-  color: #7B68EE;
+.search::placeholder {
+  color: #7b68ee;
   font-size: 15px;
 }
 
@@ -59,14 +61,14 @@ html, body, #root {
   outline: 0;
 }
 
-.searchIcon{
+.searchIcon {
   margin-left: 12px;
 }
 
-.magni{
+.magni {
   object-fit: contain;
   width: 100%;
-  height:20px;
+  height: 20px;
 }
 
 /* main */
@@ -96,11 +98,9 @@ html, body, #root {
 } */
 
 .login {
-  
 }
 
 .join {
-
 }
 
 /* .main calender */
@@ -133,7 +133,8 @@ html, body, #root {
   margin: 0 40px;
 }
 
-.cal .year, .cal .month {
+.cal .year,
+.cal .month {
   margin: 0;
   text-align: center;
 }
@@ -148,12 +149,59 @@ html, body, #root {
 }
 
 .cal_days {
+  width: 800px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.cal_days .day {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 calc(800px / 7);
+  height: calc(500px / 6);
+  align-items: center;
+}
+
+.cal_days .day p {
+  display: flex;
+  margin: 0;
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+}
+
+.cal_days .selectedAssignDay {
+  color: red !important;
+}
+
+.cal_days .otherDay {
+  opacity: 0.4;
+}
+
+.cal_days .day .sunday {
+  color: rgba(228, 4, 4, 0.712);
+}
+
+.cal_days .day .saturday {
+  color: rgba(1, 1, 218, 0.651);
+}
+
+.cal_days .day .currentDay {
+  border-radius: 15px;
+  color: white;
+  background-color: rgba(31, 93, 228, 0.705);
+}
+
+/* .cal_days {
   height: 330px;
   width: 800px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
+  overflow: hidden;
 }
 
 .cal_days .dayOfWeek {
@@ -168,13 +216,39 @@ html, body, #root {
   align-items: center;
   cursor: pointer;
   border-radius: 3px;
+  margin: 10px 0;
 }
 
 .cal_days .week:hover {
   background-color: rgb(242, 242, 242);
 }
 
+@keyframes expandWeek {
+  0% {}
+  100% {}
+}
+
+@keyframes moveWeek {
+  0% {transform: translateY(0px)}
+  100% {transform: translateY(250px);}
+}
+
+.cal_days .weekSchedule {
+}
+
+.cal_days .schedule {
+  height: 100%;
+}
+
+.cal_days .expandWeek {
+}
+
+.cal_days .moveWeek {
+  animation: moveWeek 1s cubic-bezier(0.075, 0.82, 0.165, 1) 0s forwards;
+}
+
 .cal_days .day {
+  z-index: 2;
   display:flex;
   align-items: center;
   justify-content: center;
@@ -198,36 +272,35 @@ html, body, #root {
 
 .cal_days .day:nth-child(7n+1) {
   color: #db5178;
-}
-
+} */
 
 /* to-do */
-.todayToDo{
+.todayToDo {
   grid-area: todayToDo;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
 
-.todoTitle{
+.todoTitle {
   font-size: 20px;
   margin-left: 8px;
 }
 
-.toDoList{
+.toDoList {
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
-.toDoList div{
+.toDoList div {
   height: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.toDoList a{
+.toDoList a {
   color: black;
   text-decoration: none;
 }
