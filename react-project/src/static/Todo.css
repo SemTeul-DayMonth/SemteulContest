@@ -1,0 +1,71 @@
+/* to-do */
+.todayTodo {
+  grid-area: todayToDo;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+  height: 550px;
+}
+
+.todoTitle {
+  font-size: 30px;
+  margin-left: 8px;
+  margin-bottom: 20px;
+}
+
+.nullTodoList p {
+  font-size: 20px;
+}
+
+.todoList {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.todo {
+  height: 30px;
+  width: 200px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 20px;
+  background-color: #fff;
+  margin-bottom: 10px;
+  box-shadow: #efefef 2px 2px 4px 1px;
+}
+
+.todo p,
+.nullTodoList p {
+  margin: 0;
+  margin-left: 20px;
+}
+
+.todo button {
+  margin-right: 10px;
+  background-color: #fff;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  font-size: 20px;
+  color: #7b68ee;
+}
+
+.addEvtBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 10px;
+  bottom: 30px;
+  height: 80px;
+  width: 80px;
+  border-radius: 40px;
+  box-shadow: 3px 3px 6px 1px rgb(208, 208, 208);
+  position: absolute;
+  background-color: blueviolet;
+  color: white;
+  font-size: 40px;
+  cursor: pointer;
+}
