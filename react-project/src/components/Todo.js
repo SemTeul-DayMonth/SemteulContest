@@ -4,14 +4,14 @@ import AddEventButton from "./AddEventButton";
 import GlobalContext from "../context/GlobalContext";
 
 export default function Todo() {
-  const { savedTodos, dispatchCalTodo, isTodoModal, setIsTodoModal } =
+  const { savedTodos, dispatchCalTodo, showModal, setShowModal } =
     useContext(GlobalContext);
 
   function NullTodo() {
     return (
       <div className="nullTodoList">
         <p>할 일을 추가하세요</p>
-        <button onClick={() => setIsTodoModal(true)}>+</button>
+        <button onClick={() => setShowModal("todo")}>+</button>
       </div>
     );
   }
@@ -22,7 +22,7 @@ export default function Todo() {
         {savedTodos.map((todo, i) => (
           <div className="todo" key={i}>
             <p>{todo.title}</p>
-            <button onClick={() => setIsTodoModal(true)}>+</button>
+            <button onClick={() => setShowModal("todo")}>+</button>
           </div>
         ))}
       </div>

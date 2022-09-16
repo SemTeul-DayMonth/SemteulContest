@@ -1,0 +1,57 @@
+.cal_week_header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 15px 0 5px 0;
+}
+
+.cal_week_header div:hover {
+  cursor: pointer;
+}
+
+.cal_week_header > div {
+  font-size: 20px;
+  font-weight: 100;
+  margin: 0 20px;
+}
+
+.cal_week_header .month {
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+
+.cal_week_header .month:hover {
+  background-color: rgb(240, 240, 240);
+  cursor: pointer;
+}
+
+.cal_week_days {
+  width: 780px;
+}
+
+.cal_week_days .week .day p {
+  border-radius: 30px;
+  padding: 5px;
+}
+
+.cal_week_days .week .day p:hover {
+  background-color: rgb(237, 237, 237);
+  cursor: pointer;
+}
+
+.cal_week_schedule {
+  display: flex;
+  height: 100%;
+}
+
+.cal_week_schedule > div {
+  height: 370px;
+  width: calc(780px / 7);
+  border-left: 1px solid rgb(214, 214, 214);
+  margin-bottom: 20px;
+}
+
+.cal_week_schedule div:last-child {
+  border-right: 1px solid rgb(204, 204, 204);
+}

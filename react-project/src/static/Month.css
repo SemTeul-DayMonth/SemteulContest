@@ -8,7 +8,7 @@
   font-family: "NotoSansR";
 }
 
-.cal_nav {
+.cal_month_header {
   height: 30px;
   width: 800px;
   font-weight: 500;
@@ -16,13 +16,14 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px;
 }
 
-.cal_nav div:hover {
+.cal_month_header div:hover {
   cursor: pointer;
 }
 
-.cal_nav div {
+.cal_month_header div {
   font-size: 20px;
   font-weight: 100;
   margin: 0 40px;
@@ -43,31 +44,30 @@
   font-size: 30px;
 }
 
-.cal_days {
+.cal_month {
   width: 780px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  margin-top: 10px;
 }
 
-.cal_days .week,
-.cal_days .weekDays {
+.week,
+.weekDays {
   display: flex;
   justify-content: center;
 }
 
-.cal_days .week {
+.cal_month .week {
   border-radius: 5px;
   margin: 10px 0;
 }
 
-.cal_days .week:hover {
+.cal_month .week:hover {
   background-color: rgb(240, 240, 240);
   cursor: pointer;
 }
 
-.cal_days .day {
+.day {
   display: flex;
   flex-direction: column;
   flex: 0 0 calc(780px / 7);
@@ -76,11 +76,21 @@
   justify-content: center;
 }
 
-.cal_days .weekDays .day {
+.weekDays .day {
+  font-weight: 600;
+  color: rgb(108, 108, 108);
   height: calc(200px / 6);
 }
 
-.cal_days .day p {
+.weekDays .day:first-child {
+  color: rgba(228, 4, 4, 0.712);
+}
+
+.weekDays .day:last-child {
+  color: rgba(1, 1, 218, 0.651);
+}
+
+.day p {
   display: flex;
   margin: 0;
   width: 40px;
@@ -90,29 +100,29 @@
   font-weight: 600;
 }
 
-.cal_days .selectedAssignDay {
+.cal_month .selectedAssignDay {
   color: red !important;
 }
 
-.cal_days .otherDay {
-  opacity: 0.3;
+.day .otherDay {
+  opacity: 0.4;
 }
 
-.cal_days .day .sunday {
+.day .sunday {
   color: rgba(228, 4, 4, 0.712);
 }
 
-.cal_days .day .saturday {
+.day .saturday {
   color: rgba(1, 1, 218, 0.651);
 }
 
-.cal_days .day .currentDay {
+.currentDay {
   border-radius: 20px;
   color: white;
   background-color: #7c68eeb0;
 }
 
-/* .cal_days {
+/* .cal_month {
     height: 330px;
     width: 800px;
     display: flex;
@@ -121,12 +131,12 @@
     overflow: hidden;
   }
   
-  .cal_days .dayOfWeek {
+  .cal_month .dayOfWeek {
     width: 770px;
     display: flex;
   }
   
-  .cal_days .week {
+  .cal_month .week {
     width: 770px;
     height: 40px;
     display: flex;
@@ -136,7 +146,7 @@
     margin: 10px 0;
   }
   
-  .cal_days .week:hover {
+  .cal_month .week:hover {
     background-color: rgb(242, 242, 242);
   }
   
@@ -150,21 +160,21 @@
     100% {transform: translateY(250px);}
   }
   
-  .cal_days .weekSchedule {
+  .cal_month .weekSchedule {
   }
   
-  .cal_days .schedule {
+  .cal_month .schedule {
     height: 100%;
   }
   
-  .cal_days .expandWeek {
+  .cal_month .expandWeek {
   }
   
-  .cal_days .moveWeek {
+  .cal_month .moveWeek {
     animation: moveWeek 1s cubic-bezier(0.075, 0.82, 0.165, 1) 0s forwards;
   }
   
-  .cal_days .day {
+  .cal_month .day {
     z-index: 2;
     display:flex;
     align-items: center;
@@ -175,18 +185,18 @@
     border-radius:5px;
   }
   
-  .cal_days .day a:hover {
+  .cal_month .day a:hover {
     cursor: pointer;
   }
   
-  .cal_days .otherMon {
+  .cal_month .otherMon {
     color: rgb(146, 146, 146);
   }
   
-  .cal_days .day:nth-child(7n) {
+  .cal_month .day:nth-child(7n) {
     color: #486ed7;
   }
   
-  .cal_days .day:nth-child(7n+1) {
+  .cal_month .day:nth-child(7n+1) {
     color: #db5178;
   } */

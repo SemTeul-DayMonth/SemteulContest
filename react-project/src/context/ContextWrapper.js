@@ -23,12 +23,24 @@ function initTodos() {
 
 export default function ContextWrapper(props) {
   const [monthIndex, setMonthIndex] = useState(dayjs().month());
-  const [isTodoModal, setIsTodoModal] = useState(false);
+  const [weekIndex, setWeekIndex] = useState(0);
+  const [ShowModal, setShowModal] = useState("");
+  const [showSchedule, setShowSchedule] = useState("month");
   const [savedTodos, dispatchCalTodo] = useReducer(
     savedTodosReducer,
     [],
     initTodos
   );
+
+  useEffect(() => {
+    if (weekIndex > 4) {
+      setWeekIndex(0);
+      setMonthIndex((cur) => cur + 1);
+    } else if (weekIndex < 0) {
+      setWeekIndex(4);
+      setMonthIndex((cur) => cur - 1);
+    }
+  }, [weekIndex]);
 
   useEffect(() => {
     localStorage.setItem("savedTodos", JSON.stringify(savedTodos));
@@ -39,10 +51,14 @@ export default function ContextWrapper(props) {
       value={{
         monthIndex,
         setMonthIndex,
+        weekIndex,
+        setWeekIndex,
         savedTodos,
         dispatchCalTodo,
-        isTodoModal,
-        setIsTodoModal,
+        ShowModal,
+        setShowModal,
+        showSchedule,
+        setShowSchedule,
       }}
     >
       {props.children}

@@ -1,4 +1,4 @@
-.bgTodoModal {
+.bgModal {
   position: fixed;
   display: flex;
   justify-content: center;
@@ -16,13 +16,13 @@
   height: 200px;
 }
 
-.todoModal header {
+.bgModal header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-header .grippy {
+.bgModal header .grippy {
   font-family: sans-serif;
   letter-spacing: 2px;
   cursor: move;
@@ -37,29 +37,29 @@ header .grippy {
   text-shadow: 1px 0 1px black;
 }
 
-header .grippy::after {
+.bgModal header .grippy::after {
   content: ".. .. .. ..";
 }
 
-header .close {
+.bgModal header .close {
   border: 0;
   outline: 0;
   background-color: white;
   cursor: pointer;
 }
 
-header .close::after {
+.bgModal header .close::after {
   content: "\00d7";
   font-size: 30px;
 }
 
-main .titleInput {
+.bgModal main .titleInput {
   margin-left: 20px;
   border: 0;
   border-bottom: 2px solid #7c68ee5d;
   outline: 0;
 }
 
-main .titleInput:focus {
+.bgModal main .titleInput:focus {
   border-bottom: 2px solid #826ff1fb;
 }

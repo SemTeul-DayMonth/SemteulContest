@@ -1,8 +1,8 @@
-import "../static/TodoModal.css";
+import "../static/EventModal.css";
 import GlobalContext from "../context/GlobalContext";
 import { useContext, useState } from "react";
 
-export default function TodoModal() {
+export default function EventModal() {
   const { showModal, setShowModal, dispatchCalTodo } =
     useContext(GlobalContext);
   const [title, setTitle] = useState("");
@@ -18,9 +18,12 @@ export default function TodoModal() {
 
   return (
     <div className="bgModal">
-      <form action="" className="todoModal">
+      <form action="" className="eventModal">
         <header>
-          <span className="grippy"></span>
+          <nav>
+            <div>todo</div>
+            <div>repo</div>
+          </nav>
           <button className="close" onClick={() => setShowModal("")}></button>
         </header>
         <main>
