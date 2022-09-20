@@ -24,12 +24,12 @@ export default function Week() {
     if (weekIndex > 0) {
       setWeekIndex(weekIndex - 1);
     } else {
-      setWeekIndex(4);
+      setWeekIndex(5);
       setMonthIndex((cur) => cur - 1);
     }
   }
   function next_week() {
-    if (weekIndex < 4) {
+    if (weekIndex < 5) {
       setWeekIndex(weekIndex + 1);
     } else {
       setWeekIndex(0);

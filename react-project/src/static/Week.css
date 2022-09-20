@@ -36,8 +36,12 @@
 }
 
 .cal_week_days .week .day p:hover {
-  background-color: rgb(237, 237, 237);
+  background-color: rgb(225, 225, 225);
   cursor: pointer;
+}
+
+.cal_week_days .week .day .currentDay:hover {
+  background-color: #aea3efb0;
 }
 
 .cal_week_schedule {

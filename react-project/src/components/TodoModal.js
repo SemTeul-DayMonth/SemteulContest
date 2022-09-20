@@ -1,6 +1,7 @@
 import "../static/TodoModal.css";
 import GlobalContext from "../context/GlobalContext";
 import { useContext, useState } from "react";
+import Axios from "axios";
 
 export default function TodoModal() {
   const { showModal, setShowModal, dispatchCalTodo } =
@@ -9,11 +10,12 @@ export default function TodoModal() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const todoPayload = {
-      title,
-    };
-    dispatchCalTodo({ type: "push", payload: todoPayload });
-    setShowModal("");
+    console.log("loading post");
+    Axios.post("http://localhost:8000/", {
+      todoName: title,
+    }).then(() => {
+      console.log("success post");
+    });
   }
 
   return (

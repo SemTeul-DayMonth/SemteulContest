@@ -27,18 +27,13 @@ export default function EventModal() {
           <button className="close" onClick={() => setShowModal("")}></button>
         </header>
         <main>
-          <input
-            type="text"
-            name="title"
-            placeholder="Add title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="titleInput"
-          />
+          <input type="text" />
+          <input type="text" />
+          <input type="text" />
+          <button type="submit" onClick={handleSubmit}>
+            submit
+          </button>
         </main>
-        <button type="submit" onClick={handleSubmit}>
-          submit
-        </button>
       </form>
     </div>
   );
