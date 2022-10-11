@@ -1,12 +1,12 @@
 import { useState, useContext, useEffect, Fragment } from "react";
-import GlobalContext from "./context/GlobalContext";
+import GlobalContext from "../context/GlobalContext";
 import "./static/Main.css";
-import Nav from "./components/Nav";
-import Month from "./components/Month";
-import Todo from "./components/Todo";
-import TodoModal from "./components/TodoModal";
-import EventModal from "./components/EventModal";
-import Week from "./components/Week";
+import Nav from "../components/Nav";
+import Month from "../components/Month";
+import Todo from "../components/Todo";
+import TodoModal from "../components/TodoModal";
+import EventModal from "../components/EventModal";
+import Week from "../components/Week";
 
 function Main() {
   const { ShowModal, showSchedule } = useContext(GlobalContext);
