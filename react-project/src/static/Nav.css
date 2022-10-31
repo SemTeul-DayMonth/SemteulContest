@@ -25,7 +25,8 @@
   font-size: 22px;
 }
 
-.settingsLink {
+.settingsLink,
+.nav_right a {
   margin-right: 30px;
   font-size: 22px;
   color: black;

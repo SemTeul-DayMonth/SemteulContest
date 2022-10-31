@@ -2,7 +2,7 @@ import React, { Fragment, useContext, useState, useEffect } from "react";
 import GlobalContext from "../context/GlobalContext";
 import "../static/Month.css";
 import dayjs from "dayjs";
-import { getMonth } from "../utils";
+import { getMonth } from "../utils/daysMatrix";
 import Day from "./Day";
 
 const weekDays = ["SON", "MON", "TUE", "WED", "THU", "FRI", "SAT"];

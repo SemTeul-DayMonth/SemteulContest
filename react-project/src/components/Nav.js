@@ -16,6 +16,8 @@ export default function Nav() {
         </div>
       </div>
       <div className="nav_right">
+        <a href="login">Login</a>
+        <a href="register">Register</a>
         <div className="modeSwitch">to-do</div>
         <a href="" className="settingsLink">
           settings

@@ -2,7 +2,7 @@ import { Fragment, useContext, useEffect, useState } from "react";
 import "../static/Week.css";
 import GlobalContext from "../context/GlobalContext";
 import dayjs from "dayjs";
-import { getMonth } from "../utils";
+import { getMonth } from "../utils/daysMatrix";
 import Day from "./Day";
 
 export default function Week() {
@@ -24,7 +24,7 @@ export default function Week() {
     if (weekIndex > 0) {
       setWeekIndex(weekIndex - 1);
     } else {
-      setWeekIndex(5);
+      setWeekIndex(4);
       setMonthIndex((cur) => cur - 1);
     }
   }

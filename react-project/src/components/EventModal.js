@@ -28,8 +28,6 @@ export default function EventModal() {
         </header>
         <main>
           <input type="text" />
-          <input type="text" />
-          <input type="text" />
           <button type="submit" onClick={handleSubmit}>
             submit
           </button>

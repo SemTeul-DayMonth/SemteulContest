@@ -13,6 +13,9 @@ const resolvers = require("./graphql/resolvers");
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.post("/", function (req, res) {
+  res.send("POST request to the homepage");
+});
 
 const pubsub = new PubSub();
 

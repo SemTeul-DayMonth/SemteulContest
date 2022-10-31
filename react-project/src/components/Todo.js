@@ -1,4 +1,5 @@
 import { useState, useContext, Fragment } from "react";
+import { useQuery } from "@apollo/react-hooks";
 import "../static/Todo.css";
 import AddEventButton from "./AddEventButton";
 import GlobalContext from "../context/GlobalContext";
@@ -6,6 +7,11 @@ import GlobalContext from "../context/GlobalContext";
 export default function Todo() {
   const { savedTodos, dispatchCalTodo, showModal, setShowModal } =
     useContext(GlobalContext);
+
+  // const {
+  //   loading,
+  //   data: { getPost: post },
+  // } = useQuery;
 
   function NullTodo() {
     return (
@@ -38,3 +44,21 @@ export default function Todo() {
     </div>
   );
 }
+
+// const FETCH_TODOS_QUERY = gql`
+//   {
+//     getPost() {
+//     id
+//     body
+//     username
+//     createdAt
+//     tdyTds {
+//       id
+//       date
+//       todo
+//       username
+//       createdAt
+//     }
+//   }
+//   }
+// `;

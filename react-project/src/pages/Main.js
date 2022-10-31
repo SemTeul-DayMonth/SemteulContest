@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect, Fragment } from "react";
 import GlobalContext from "../context/GlobalContext";
-import "./static/Main.css";
+import "../static/Main.css";
 import Nav from "../components/Nav";
 import Month from "../components/Month";
 import Todo from "../components/Todo";
