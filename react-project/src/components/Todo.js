@@ -1,17 +1,43 @@
 import { useState, useContext, Fragment } from "react";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/react-hooks";
+import gql from "graphql-tag";
 import "../static/Todo.css";
 import AddEventButton from "./AddEventButton";
 import GlobalContext from "../context/GlobalContext";
+import { AuthContext } from "../context/auth";
+import { useForm } from "../utils/hooks";
 
 export default function Todo() {
-  const { savedTodos, dispatchCalTodo, showModal, setShowModal } =
-    useContext(GlobalContext);
+  const { user } = useContext(AuthContext);
+  const userId = user?.id;
+  const { setShowModal } = useContext(GlobalContext);
+  const [todoList, setTodoList] = useState([]);
+  const { error } = useQuery(FETCH_TODOS_QUERY, {
+    onCompleted({ getTodos: { todos } }) {
+      setTodoList(todos);
+    },
+    onError(err) {
+      console.log(err);
+    },
+    variables: { userId },
+  });
 
-  // const {
-  //   loading,
-  //   data: { getPost: post },
-  // } = useQuery;
+  const { onChange, onSubmit, values } = useForm(deleteTdytd, {
+    userId,
+    todoId: "",
+  });
+
+  const [deleteTodo, { loading }] = useMutation(DELETE_TODO, {
+    onError(err) {
+      console.log(err);
+    },
+    variables: values,
+  });
+
+  function deleteTdytd() {
+    deleteTodo();
+  }
 
   function NullTodo() {
     return (
@@ -25,12 +51,28 @@ export default function Todo() {
   function ShowTodo() {
     return (
       <div className="todoList">
-        {savedTodos.map((todo, i) => (
-          <div className="todo" key={i}>
-            <p>{todo.title}</p>
-            <button onClick={() => setShowModal("todo")}>+</button>
-          </div>
-        ))}
+        {error ? (
+          <h1>Error!</h1>
+        ) : (
+          todoList &&
+          todoList.map((todo, i) => (
+            <div className="todo" key={i}>
+              {console.log(todo)}
+              <p>{todo.todo}</p>
+              <form action="" method="post" onSubmit={onSubmit}>
+                <input
+                  type="hidden"
+                  name="todoId"
+                  value={todo.id}
+                  onLoad={onChange}
+                />
+                <button type="submit">-</button>
+              </form>
+
+              <button onClick={() => setShowModal("todo")}>+</button>
+            </div>
+          ))
+        )}
       </div>
     );
   }
@@ -38,27 +80,41 @@ export default function Todo() {
   return (
     <div className="todayTodo">
       <div className="todoTitle">Today's To-Do List</div>
-      {savedTodos.length === 0 && <NullTodo />}
+      {!todoList && <NullTodo />}
       <ShowTodo />
       <AddEventButton />
     </div>
   );
 }
 
-// const FETCH_TODOS_QUERY = gql`
-//   {
-//     getPost() {
-//     id
-//     body
-//     username
-//     createdAt
-//     tdyTds {
-//       id
-//       date
-//       todo
-//       username
-//       createdAt
-//     }
-//   }
-//   }
-// `;
+const FETCH_TODOS_QUERY = gql`
+  query getTodos($userId: ID!) {
+    getTodos(userId: $userId) {
+      id
+      todos {
+        id
+        date
+        todo
+        createdAt
+      }
+      username
+      userId
+    }
+  }
+`;
+
+const DELETE_TODO = gql`
+  mutation DeleteTodo($userId: ID!, $todoId: ID!) {
+    deleteTodo(userId: $userId, todoId: $todoId) {
+      id
+      userId
+      username
+      todos {
+        id
+        date
+        todo
+        createdAt
+      }
+    }
+  }
+`;

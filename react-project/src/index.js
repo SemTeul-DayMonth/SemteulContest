@@ -1,4 +1,4 @@
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import ApolloProvider from "./ApolloProvider";
 
-ReactDOM.render(ApolloProvider, document.getElementById("root"));
+ReactDOM.createRoot(document.getElementById("root")).render(ApolloProvider);

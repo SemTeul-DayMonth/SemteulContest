@@ -2,19 +2,6 @@ import React, { useState, useEffect, useReducer, useMemo } from "react";
 import GlobalContext from "./GlobalContext";
 import dayjs from "dayjs";
 
-function savedTodosReducer(state, { type, payload }) {
-  switch (type) {
-    case "push":
-      return [...state, payload];
-    case "update":
-      return state.map((evt) => (evt.id === payload.id ? payload : evt));
-    case "delete":
-      return state.filter((evt) => evt.id !== payload.id);
-    default:
-      throw new Error();
-  }
-}
-
 function initTodos() {
   const storageTodos = localStorage.getItem("savedTodos");
   const parsedTodos = storageTodos ? JSON.parse(storageTodos) : [];
@@ -26,11 +13,6 @@ export default function ContextWrapper(props) {
   const [weekIndex, setWeekIndex] = useState(0);
   const [ShowModal, setShowModal] = useState("");
   const [showSchedule, setShowSchedule] = useState("month");
-  const [savedTodos, dispatchCalTodo] = useReducer(
-    savedTodosReducer,
-    [],
-    initTodos
-  );
 
   useEffect(() => {
     if (weekIndex > 4) {
@@ -42,10 +24,6 @@ export default function ContextWrapper(props) {
     }
   }, [weekIndex]);
 
-  useEffect(() => {
-    localStorage.setItem("savedTodos", JSON.stringify(savedTodos));
-  }, [savedTodos]);
-
   return (
     <GlobalContext.Provider
       value={{
@@ -53,8 +31,6 @@ export default function ContextWrapper(props) {
         setMonthIndex,
         weekIndex,
         setWeekIndex,
-        savedTodos,
-        dispatchCalTodo,
         ShowModal,
         setShowModal,
         showSchedule,

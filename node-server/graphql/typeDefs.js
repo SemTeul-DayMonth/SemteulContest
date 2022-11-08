@@ -1,19 +1,17 @@
 const { gql } = require("apollo-server");
 
 module.exports = gql`
-  type Post {
+  type Todos {
     id: ID!
-    body: String!
+    userId: ID!
     username: String!
-    createdAt: String!
-    tdyTds: [TdyTd]!
+    todos: [Todo]!
   }
 
-  type TdyTd {
+  type Todo {
     id: ID!
     date: String!
     todo: String!
-    username: String!
     createdAt: String!
   }
 
@@ -33,19 +31,15 @@ module.exports = gql`
   }
 
   type Query {
-    getPosts: [Post]
-    getPost(postId: ID!): Post
+    getTodos(userId: ID!): Todos
+    getTodo(userId: ID!, todoId: ID!): Todo
   }
 
   type Mutation {
     register(registerInput: RegisterInput): User!
     login(username: String!, password: String!): User!
-    createPost(body: String!): Post!
-    deletePost(postId: ID!): String!
-    createTdyTd(postId: ID!, date: String!, todo: String!): Post!
-    deleteTdyTd(postId: ID!, tdyTdId: ID!): Post!
-  }
-  type Subscription {
-    newPost: Post!
+    createTodo(userId: ID!, date: String!, todo: String!): Todos!
+    deleteTodo(userId: ID!, todoId: ID!): Todos!
+    updateTodo(userId: ID!, todoId: ID!, date: String!, todo: String!): Todos!
   }
 `;

@@ -23,28 +23,22 @@ function Register(props) {
   const [addUser, { loading }] = useMutation(REGISTER_USER, {
     update(_, { data: { register: userData } }) {
       context.login(userData);
-      console.log(navigate);
       navigate("/");
-      console.log(userData);
     },
-    // update(proxy, result) {
-    //   console.log(result);
-    // },
+
     onError(err) {
       setErrors(err.graphQLErrors[0].extensions.errors);
-      console.log("err:", err.graphQLErrors[0].extensions.errors);
     },
     variables: values,
   });
 
   function registerUser() {
     addUser();
-    console.log("register");
   }
 
   return (
     <div className="register">
-      <form action="/" method="post" onSubmit={onSubmit}>
+      <form action="" method="post" onSubmit={onSubmit}>
         <input
           type="text"
           name="username"

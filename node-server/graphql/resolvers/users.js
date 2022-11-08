@@ -8,6 +8,7 @@ const {
 } = require("../../utils/validators");
 const { SECRET_KEY } = require("../../config");
 const User = require("../../models/User");
+const Todos = require("../../models/Todos");
 
 function generateToken(user) {
   return jwt.sign(
@@ -75,27 +76,27 @@ module.exports = {
       }
       password = await bcrypt.hash(password, 12);
 
-      const newUser = new User({
+      const newUser = await new User({
         email,
         username,
         password,
         createdAt: new Date().toISOString(),
       });
 
-      const res = await newUser.save();
+      const resUser = await newUser.save();
 
-      const token = jwt.sign(
-        {
-          id: res.id,
-          email: res.email,
-          username: res.username,
-        },
-        SECRET_KEY,
-        { expiresIn: "1h" }
-      );
+      const newTodo = await new Todos({
+        username,
+        userId: resUser._id,
+      });
+
+      await newTodo.save();
+
+      const token = generateToken(resUser);
+
       return {
-        ...res._doc,
-        id: res._id,
+        ...resUser._doc,
+        id: resUser._id,
         token,
       };
     },

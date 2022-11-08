@@ -5,8 +5,6 @@ const GlobalContext = React.createContext({
   setMonthIndex: (index) => {},
   weekIndex: 0,
   setWeekIndex: () => {},
-  savedTodos: [],
-  dispatchCalTodo: ({ type, payload }) => {},
   ShowModal: "",
   setShowModal: () => {},
   showSchedule: "month",
