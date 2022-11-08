@@ -1,6 +1,7 @@
 import { useState, useContext, Fragment } from "react";
 import { useQuery } from "@apollo/client";
 import { useMutation } from "@apollo/react-hooks";
+
 import gql from "graphql-tag";
 import "../static/Todo.css";
 import AddEventButton from "./AddEventButton";
@@ -10,25 +11,30 @@ import { useForm } from "../utils/hooks";
 
 export default function Todo() {
   const { user } = useContext(AuthContext);
-  const userId = user?.id;
+
   const { setShowModal } = useContext(GlobalContext);
-  const [todoList, setTodoList] = useState([]);
-  const { error } = useQuery(FETCH_TODOS_QUERY, {
-    onCompleted({ getTodos: { todos } }) {
-      setTodoList(todos);
-    },
+
+  const userId = user?.id;
+  let todoList = [];
+  const { error, data } = useQuery(FETCH_TODOS_QUERY, {
     onError(err) {
       console.log(err);
+      if (user) {
+        window.location.replace("/");
+      }
     },
     variables: { userId },
   });
+  if (data) {
+    todoList = data.getTodos.todos;
+  }
 
   const { onChange, onSubmit, values } = useForm(deleteTdytd, {
     userId,
     todoId: "",
   });
 
-  const [deleteTodo, { loading }] = useMutation(DELETE_TODO, {
+  const [deleteTodo] = useMutation(DELETE_TODO, {
     onError(err) {
       console.log(err);
     },
@@ -37,6 +43,11 @@ export default function Todo() {
 
   function deleteTdytd() {
     deleteTodo();
+  }
+
+  async function onClickFn(e) {
+    await onChange(e);
+    onSubmit(e);
   }
 
   function NullTodo() {
@@ -52,23 +63,24 @@ export default function Todo() {
     return (
       <div className="todoList">
         {error ? (
-          <h1>Error!</h1>
+          userId ? (
+            <h1>Error!</h1>
+          ) : (
+            <h1>Please Login</h1>
+          )
         ) : (
-          todoList &&
+          data &&
           todoList.map((todo, i) => (
             <div className="todo" key={i}>
-              {console.log(todo)}
               <p>{todo.todo}</p>
-              <form action="" method="post" onSubmit={onSubmit}>
-                <input
-                  type="hidden"
-                  name="todoId"
-                  value={todo.id}
-                  onLoad={onChange}
-                />
-                <button type="submit">-</button>
-              </form>
-
+              <button
+                name="todoId"
+                value={todo.id}
+                onClick={onClickFn}
+                type="submit"
+              >
+                -
+              </button>
               <button onClick={() => setShowModal("todo")}>+</button>
             </div>
           ))
