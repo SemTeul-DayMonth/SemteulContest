@@ -18,8 +18,6 @@ export default function Week() {
     getMonth(monthIndex)[weekIndex]
   );
 
-  console.log(currentWeek, monthIndex, weekIndex);
-
   function prev_week() {
     if (weekIndex > 0) {
       setWeekIndex(weekIndex - 1);

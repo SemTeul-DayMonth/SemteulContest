@@ -15,19 +15,19 @@ export default function TodoModal() {
   const { user } = useContext(AuthContext);
 
   const { onChange, onSubmit, values } = useForm(createTdytd, {
-    date: dayjs(new Date()).format("YYYY-MM-DD").toString(),
-    todo: "",
+    date: dayjs().format("YYYY-MM-DD").toString(),
+    title: "",
     userId: user.id,
   });
 
-  const [createTodo, { loading }] = useMutation(CREATE_TODO, {
+  const [createTodo] = useMutation(CREATE_TODO, {
     onError(err) {
       console.log(err);
     },
-    variables: values,
+    variables: { pageInput: values },
   });
 
-  function createTdytd() {
+  async function createTdytd() {
     createTodo();
   }
 
@@ -41,10 +41,11 @@ export default function TodoModal() {
         <main>
           <input
             type="text"
-            name="todo"
+            name="title"
             placeholder="Add todo"
             onChange={onChange}
             className="titleInput"
+            required
           />
         </main>
         <button type="submit">submit</button>
@@ -54,17 +55,25 @@ export default function TodoModal() {
 }
 
 const CREATE_TODO = gql`
-  mutation CreateTodo($userId: ID!, $date: String!, $todo: String!) {
-    createTodo(userId: $userId, date: $date, todo: $todo) {
+  mutation CreatePage($pageInput: PageInput) {
+    createPage(pageInput: $pageInput) {
       id
+      pages {
+        id
+        title
+        date
+        isDone
+        createdAt
+        parent {
+          parentId
+        }
+        child {
+          childId
+        }
+        text
+      }
       userId
       username
-      todos {
-        id
-        date
-        todo
-        createdAt
-      }
     }
   }
 `;

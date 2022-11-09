@@ -8,36 +8,39 @@ import AddEventButton from "./AddEventButton";
 import GlobalContext from "../context/GlobalContext";
 import { AuthContext } from "../context/auth";
 import { useForm } from "../utils/hooks";
+import dayjs from "dayjs";
 
 export default function Todo() {
-  const { user } = useContext(AuthContext);
-
   const { setShowModal } = useContext(GlobalContext);
-
+  const { user } = useContext(AuthContext);
   const userId = user?.id;
+
   let todoList = [];
   const { error, data } = useQuery(FETCH_TODOS_QUERY, {
     onError(err) {
-      console.log(err);
+      // console.log(err);
       if (user) {
-        window.location.replace("/");
+        // window.location.replace("/");
       }
     },
     variables: { userId },
   });
   if (data) {
-    todoList = data.getTodos.todos;
+    todoList = data.getPages.pages.filter(
+      ({ date }) =>
+        dayjs(date).format("YYYY-MM-DD") === dayjs().format("YYYY-MM-DD")
+    );
   }
 
   const { onChange, onSubmit, values } = useForm(deleteTdytd, {
     userId,
-    todoId: "",
+    pageId: "",
   });
 
   const [deleteTodo] = useMutation(DELETE_TODO, {
-    onError(err) {
-      console.log(err);
-    },
+    // onError(err) {
+    //   console.log(err);
+    // },
     variables: values,
   });
 
@@ -70,12 +73,12 @@ export default function Todo() {
           )
         ) : (
           data &&
-          todoList.map((todo, i) => (
+          todoList.map((page, i) => (
             <div className="todo" key={i}>
-              <p>{todo.todo}</p>
+              <p>{page.title}</p>
               <button
-                name="todoId"
-                value={todo.id}
+                name="pageId"
+                value={page.id}
                 onClick={onClickFn}
                 type="submit"
               >
@@ -100,31 +103,45 @@ export default function Todo() {
 }
 
 const FETCH_TODOS_QUERY = gql`
-  query getTodos($userId: ID!) {
-    getTodos(userId: $userId) {
+  query GetPages($userId: ID!) {
+    getPages(userId: $userId) {
       id
-      todos {
-        id
-        date
-        todo
-        createdAt
-      }
-      username
       userId
+      pages {
+        id
+        title
+        date
+        isDone
+        parent {
+          parentId
+        }
+        child {
+          childId
+        }
+        text
+      }
     }
   }
 `;
 
 const DELETE_TODO = gql`
-  mutation DeleteTodo($userId: ID!, $todoId: ID!) {
-    deleteTodo(userId: $userId, todoId: $todoId) {
+  mutation DeletePage($userId: ID!, $pageId: ID!) {
+    deletePage(userId: $userId, pageId: $pageId) {
       id
       userId
       username
-      todos {
+      pages {
         id
+        title
         date
-        todo
+        isDone
+        parent {
+          parentId
+        }
+        child {
+          childId
+        }
+        text
         createdAt
       }
     }

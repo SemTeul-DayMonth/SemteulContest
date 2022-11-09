@@ -1,13 +1,13 @@
 const usersResolvers = require("./users");
-const todosResolvers = require("./todos");
+const pagesResolvers = require("./pages");
 
 module.exports = {
   Query: {
-    ...todosResolvers.Query,
+    ...pagesResolvers.Query,
   },
 
   Mutation: {
     ...usersResolvers.Mutation,
-    ...todosResolvers.Mutation,
+    ...pagesResolvers.Mutation,
   },
 };

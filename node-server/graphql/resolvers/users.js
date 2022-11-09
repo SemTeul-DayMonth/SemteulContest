@@ -8,7 +8,7 @@ const {
 } = require("../../utils/validators");
 const { SECRET_KEY } = require("../../config");
 const User = require("../../models/User");
-const Todos = require("../../models/Todos");
+const Pages = require("../../models/Pages");
 
 function generateToken(user) {
   return jwt.sign(
@@ -85,12 +85,13 @@ module.exports = {
 
       const resUser = await newUser.save();
 
-      const newTodo = await new Todos({
+      const newPage = await new Pages({
         username,
         userId: resUser._id,
+        pages: [],
       });
 
-      await newTodo.save();
+      await newPage.save();
 
       const token = generateToken(resUser);
 
