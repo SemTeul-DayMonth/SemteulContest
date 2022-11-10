@@ -14,20 +14,19 @@ export default function Week() {
     setShowSchedule,
   } = useContext(GlobalContext);
   const weekDays = ["SON", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-  const [currentWeek, setCurrentWeek] = useState(
-    getMonth(monthIndex)[weekIndex]
-  );
+  let currentMonth = getMonth(monthIndex);
+  const [currentWeek, setCurrentWeek] = useState(currentMonth[weekIndex]);
 
   function prev_week() {
     if (weekIndex > 0) {
       setWeekIndex(weekIndex - 1);
     } else {
-      setWeekIndex(4);
+      setWeekIndex(getMonth(monthIndex - 1)[6] - 1);
       setMonthIndex((cur) => cur - 1);
     }
   }
   function next_week() {
-    if (weekIndex < 5) {
+    if (weekIndex < currentMonth[6] - 1) {
       setWeekIndex(weekIndex + 1);
     } else {
       setWeekIndex(0);
@@ -36,7 +35,7 @@ export default function Week() {
   }
 
   useEffect(() => {
-    setCurrentWeek(getMonth(monthIndex)[weekIndex]);
+    setCurrentWeek(currentMonth[weekIndex]);
   }, [weekIndex]);
 
   return (
@@ -51,9 +50,7 @@ export default function Week() {
             setShowSchedule("month");
           }}
         >
-          {dayjs(new Date(dayjs().year(), monthIndex))
-            .format("MMM")
-            .toUpperCase()}
+          {dayjs(new Date(dayjs().year(), monthIndex)).format("MM")}
         </p>
         <div className="next_week" onClick={next_week}>
           &gt;

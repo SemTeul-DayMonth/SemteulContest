@@ -14,8 +14,8 @@
   margin-bottom: 20px;
 }
 
-.nullTodoList p {
-  font-size: 20px;
+.addTodoBtn {
+  width: 200px;
 }
 
 .todoList {
@@ -37,8 +37,7 @@
   box-shadow: #efefef 2px 2px 4px 1px;
 }
 
-.todo p,
-.nullTodoList p {
+.todo p {
   margin: 0;
   margin-left: 20px;
 }

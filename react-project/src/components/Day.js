@@ -2,8 +2,9 @@ import dayjs from "dayjs";
 import { useContext } from "react";
 import GlobalContext from "../context/GlobalContext";
 
-export default function Day({ month, day }) {
-  const { showSchedule, setShowSchedule } = useContext(GlobalContext);
+export default function Day({ month, day, pageCount }) {
+  const { setNowDate, showSchedule, setShowSchedule } =
+    useContext(GlobalContext);
   function getCurrentDayClass() {
     return day.format("DD-MM-YY") === dayjs().format("DD-MM-YY")
       ? "currentDay"
@@ -27,11 +28,13 @@ export default function Day({ month, day }) {
           `${getCurrentDayClass()}`
         }
         onClick={() => {
-          showSchedule === "week" && setShowSchedule(day);
+          showSchedule === "week" && setShowSchedule("day");
+          setNowDate(day);
         }}
       >
         {day.format("DD")}
       </p>
+      <div>{getCurrentMonthClass() === "" && pageCount}</div>
     </div>
   );
 }

@@ -11,18 +11,9 @@ function initTodos() {
 export default function ContextWrapper(props) {
   const [monthIndex, setMonthIndex] = useState(dayjs().month());
   const [weekIndex, setWeekIndex] = useState(0);
-  const [ShowModal, setShowModal] = useState("");
+  const [nowDate, setNowDate] = useState(dayjs());
+  const [modalDate, setModalDate] = useState("");
   const [showSchedule, setShowSchedule] = useState("month");
-
-  useEffect(() => {
-    if (weekIndex > 4) {
-      setWeekIndex(0);
-      setMonthIndex((cur) => cur + 1);
-    } else if (weekIndex < 0) {
-      setWeekIndex(4);
-      setMonthIndex((cur) => cur - 1);
-    }
-  }, [weekIndex]);
 
   return (
     <GlobalContext.Provider
@@ -31,8 +22,10 @@ export default function ContextWrapper(props) {
         setMonthIndex,
         weekIndex,
         setWeekIndex,
-        ShowModal,
-        setShowModal,
+        nowDate,
+        setNowDate,
+        modalDate,
+        setModalDate,
         showSchedule,
         setShowSchedule,
       }}

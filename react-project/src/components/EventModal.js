@@ -3,7 +3,7 @@ import GlobalContext from "../context/GlobalContext";
 import { useContext, useState } from "react";
 
 export default function EventModal() {
-  const { showModal, setShowModal, dispatchCalTodo } =
+  const { modalDate, setModalDate, dispatchCalTodo } =
     useContext(GlobalContext);
   const [title, setTitle] = useState("");
 
@@ -13,7 +13,7 @@ export default function EventModal() {
       title,
     };
     dispatchCalTodo({ type: "push", payload: todoPayload });
-    setShowModal("");
+    setModalDate("");
   }
 
   return (
@@ -24,7 +24,7 @@ export default function EventModal() {
             <div>todo</div>
             <div>repo</div>
           </nav>
-          <button className="close" onClick={() => setShowModal("")}></button>
+          <button className="close" onClick={() => setModalDate("")}></button>
         </header>
         <main>
           <input type="text" />

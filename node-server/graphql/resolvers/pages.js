@@ -53,7 +53,7 @@ module.exports = {
         });
       }
       const userPages = await Pages.findOne({ userId });
-      console.log(title, userId, date, text);
+
       if (userPages.username === username) {
         if (userPages.pages) {
           userPages.pages.unshift({

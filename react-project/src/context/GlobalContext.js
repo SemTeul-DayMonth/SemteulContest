@@ -5,9 +5,11 @@ const GlobalContext = React.createContext({
   setMonthIndex: (index) => {},
   weekIndex: 0,
   setWeekIndex: () => {},
-  ShowModal: "",
-  setShowModal: () => {},
-  showSchedule: "month",
+  nowDate: {},
+  setNowDate: () => {},
+  modalDate: {},
+  setModalDate: () => {},
+  showSchedule: "",
   setShowSchedule: () => {},
 });
 

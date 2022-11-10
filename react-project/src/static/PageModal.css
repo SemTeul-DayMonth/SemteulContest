@@ -1,0 +1,6 @@
+.pageModal {
+  position: fixed;
+  background-color: rgb(255, 255, 255);
+  width: 400px;
+  height: 200px;
+}

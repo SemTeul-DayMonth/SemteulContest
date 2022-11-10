@@ -1,17 +1,17 @@
-.eventModal {
+.pageModal {
   position: fixed;
   background-color: rgb(255, 255, 255);
   width: 500px;
   height: 300px;
 }
 
-.eventModal nav {
+.pageModal nav {
   display: flex;
   flex-direction: row;
   margin-left: 20px;
 }
 
-.eventModal nav > div {
+.pageModal nav > div {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,11 +21,11 @@
   background-color: rgb(223, 223, 223);
 }
 
-.eventModal nav > div:hover {
+.pageModal nav > div:hover {
   cursor: pointer;
 }
 
-.eventModal main {
+.pageModal main {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -33,7 +33,7 @@
   background-color: rgb(223, 223, 223);
 }
 
-.eventModal main input {
+.pageModal main input {
   margin: 10px;
   width: 100px;
 }

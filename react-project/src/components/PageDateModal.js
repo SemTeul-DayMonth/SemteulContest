@@ -1,48 +1,54 @@
-import "../static/TodoModal.css";
+import "../static/PageDateModal.css";
 import GlobalContext from "../context/GlobalContext";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 import { useContext, useState } from "react";
-import Axios from "axios";
 import { AuthContext } from "../context/auth";
 import dayjs from "dayjs";
 import { useForm } from "../utils/hooks";
 
-export default function TodoModal() {
-  const { showModal, setShowModal, dispatchCalTodo } =
-    useContext(GlobalContext);
+export default function PageDateModal() {
+  const { modalDate, setModalDate } = useContext(GlobalContext);
   const { user } = useContext(AuthContext);
+  const userId = user?.id;
 
   const { onChange, onSubmit, values } = useForm(createTdytd, {
-    date: dayjs().format("YYYY-MM-DD").toString(),
+    date: modalDate.format("YYYY-MM-DD").toString(),
     title: "",
-    userId: user.id,
+    userId,
   });
 
-  const [createTodo] = useMutation(CREATE_TODO, {
+  const [createPage] = useMutation(CREATE_PAGE, {
     onError(err) {
-      console.log(err);
+      // console.log(err);
     },
-    variables: { pageInput: values },
+    variables: values,
   });
 
   async function createTdytd() {
-    createTodo();
+    createPage();
+    setModalDate("");
   }
 
   return (
     <div className="bgModal">
-      <form action="" method="post" className="todoModal" onSubmit={onSubmit}>
+      <form
+        action=""
+        method="post"
+        className="pageDateModal"
+        onSubmit={onSubmit}
+      >
         <header>
           <span className="grippy"></span>
-          <button className="close" onClick={() => setShowModal("")}></button>
+          <button className="close" onClick={() => setModalDate("")}></button>
         </header>
         <main>
           <input
             type="text"
             name="title"
-            placeholder="Add todo"
+            value={values.title}
+            placeholder="Add Page"
             onChange={onChange}
             className="titleInput"
             required
@@ -54,9 +60,9 @@ export default function TodoModal() {
   );
 }
 
-const CREATE_TODO = gql`
-  mutation CreatePage($pageInput: PageInput) {
-    createPage(pageInput: $pageInput) {
+const CREATE_PAGE = gql`
+  mutation CreatePage($date: String!, $title: String!, $userId: ID!) {
+    createPage(pageInput: { date: $date, title: $title, userId: $userId }) {
       id
       pages {
         id
