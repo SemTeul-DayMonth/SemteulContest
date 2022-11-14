@@ -22,8 +22,8 @@ export default function PageDateModal() {
   const { onChange, onSubmit, values } = useForm(createTdytd, {
     date: modalObj.date.format("YYYY-MM-DD").toString(),
     title: "",
-    type: "page",
-    // parent: prntIdList,
+    pageType: "page",
+    parentIds: prntIdList,
     text: "",
     userId,
   });
@@ -36,6 +36,9 @@ export default function PageDateModal() {
   });
 
   async function createTdytd() {
+    prntIdList = prntList.map(({ id }) => ({ parentId: id }));
+    values.parentIds = prntIdList;
+    console.log(values);
     createPage();
     setModalObj({ type: "" });
   }
@@ -48,9 +51,7 @@ export default function PageDateModal() {
     pageList = data.getPages.pages.filter(({ title }) =>
       title.includes(prntTitle)
     );
-    console.log("page", pageList);
   }
-  console.log("prnt", prntList);
 
   function addPrnt(checked, title, date, id) {
     if (checked) {
@@ -139,6 +140,7 @@ export default function PageDateModal() {
               name="pageType"
               value="page"
               onChange={onChange}
+              defaultChecked
             />
             page
           </label>
@@ -163,6 +165,7 @@ const CREATE_PAGE = gql`
     $date: String!
     $title: String!
     $userId: ID!
+    $parentIds: [ParentIds]
     $pageType: String!
   ) {
     createPage(
@@ -170,6 +173,7 @@ const CREATE_PAGE = gql`
         date: $date
         title: $title
         userId: $userId
+        parentIds: $parentIds
         pageType: $pageType
       }
     ) {
