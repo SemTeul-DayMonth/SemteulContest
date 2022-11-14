@@ -24,15 +24,9 @@ module.exports = gql`
     parent: [Parents]!
     child: [Childs]!
     text: String!
+    pageType: String!
     createdAt: String!
   }
-
-  # type Todos {
-  #   id: ID!
-  #   userId: ID!
-  #   username: String!
-  #   todos: [Todo]!
-  # }
 
   input RegisterInput {
     username: String!
@@ -49,6 +43,7 @@ module.exports = gql`
     text: String
     parentIds: [ParentIds]
     childIds: [ChildIds]
+    pageType: String!
   }
 
   type Parents {

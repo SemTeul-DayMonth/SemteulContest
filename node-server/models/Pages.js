@@ -11,6 +11,7 @@ const pageSchema = new Schema({
       title: String,
       date: String,
       isDone: Boolean,
+      text: String,
       parent: [
         {
           parentId: {
@@ -27,7 +28,7 @@ const pageSchema = new Schema({
           },
         },
       ],
-      text: String,
+      pageType: String,
       createdAt: String,
     },
   ],

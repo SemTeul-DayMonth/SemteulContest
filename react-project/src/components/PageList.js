@@ -7,13 +7,13 @@ import GlobalContext from "../context/GlobalContext";
 import { AuthContext } from "../context/auth";
 import { useForm } from "../utils/hooks";
 import dayjs from "dayjs";
-import FETCH_TODOS_QUERY from "../utils/querys";
+import { FETCH_TODOS_QUERY } from "../utils/querys";
 
-export default function TodoList({ todoDate }) {
-  const { setModalDate } = useContext(GlobalContext);
+export default function PageList({ pageDate }) {
+  const { setModalObj } = useContext(GlobalContext);
   const { user } = useContext(AuthContext);
   const userId = user?.id;
-  let todoList = [];
+  let pageList = [];
 
   useEffect(() => {
     if (user && !userId) {
@@ -26,39 +26,43 @@ export default function TodoList({ todoDate }) {
   });
 
   if (data) {
-    todoList = data.getPages.pages.filter(
+    pageList = data.getPages.pages.filter(
       ({ date }) =>
-        dayjs(date).format("YYYY-MM-DD") === todoDate.format("YYYY-MM-DD")
+        dayjs(date).format("YYYY-MM-DD") === pageDate.format("YYYY-MM-DD")
     );
   }
 
-  const { onChange, onSubmit, values } = useForm(deleteTdytd, {
+  const { onChange, onSubmit, values } = useForm(deletePageCb, {
     userId,
     pageId: "",
   });
 
-  const [deleteTodo] = useMutation(DELETE_TODO, {
+  const [deletePage] = useMutation(DELETE_PAGE, {
+    onError(err) {
+      console.log(JSON.stringify(err, null, 2));
+    },
     variables: values,
   });
 
-  function deleteTdytd() {
-    deleteTodo();
+  function deletePageCb() {
+    deletePage();
   }
+
   async function onClickFn(e) {
     await onChange(e);
     onSubmit(e);
   }
 
   return (
-    <div className="todoList">
+    <div className="pageList">
       {error ? (
         userId ? (
-          <h1>Error!</h1>
+          <p>Error!</p>
         ) : (
-          <h1>Please Login</h1>
+          <p>Please Login</p>
         )
-      ) : todoList.length !== 0 ? (
-        todoList.map((page, i) => (
+      ) : pageList.length !== 0 ? (
+        pageList.map((page, i) => (
           <div className="todo" key={i}>
             <p>{page.title}</p>
             <button
@@ -69,20 +73,38 @@ export default function TodoList({ todoDate }) {
             >
               -
             </button>
-            <button onClick={() => setModalDate(todoDate)}>+</button>
+            <button
+              onClick={() =>
+                setModalObj({
+                  date: pageDate,
+                  parent: [{ parentId: page.id }],
+                  type: "pageDate",
+                })
+              }
+            >
+              +
+            </button>
           </div>
         ))
       ) : (
-        <h1>할 일을 추가하세요</h1>
+        <p>할 일을 추가하세요</p>
       )}
-      <button className="addTodoBtn" onClick={() => setModalDate(todoDate)}>
+      <button
+        className="addTodoBtn"
+        onClick={() =>
+          setModalObj({
+            date: pageDate,
+            type: "pageDate",
+          })
+        }
+      >
         +
       </button>
     </div>
   );
 }
 
-const DELETE_TODO = gql`
+const DELETE_PAGE = gql`
   mutation DeletePage($userId: ID!, $pageId: ID!) {
     deletePage(userId: $userId, pageId: $pageId) {
       id
@@ -91,7 +113,7 @@ const DELETE_TODO = gql`
       pages {
         id
         title
-        todoDate
+        date
         isDone
         parent {
           parentId
@@ -100,6 +122,7 @@ const DELETE_TODO = gql`
           childId
         }
         text
+        pageType
         createdAt
       }
     }

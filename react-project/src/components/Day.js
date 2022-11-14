@@ -1,9 +1,12 @@
 import dayjs from "dayjs";
 import { useContext } from "react";
 import GlobalContext from "../context/GlobalContext";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function Day({ month, day, pageCount }) {
-  const { setNowDate, showSchedule, setShowSchedule } =
+  const navigation = useNavigate();
+  const params = useParams();
+  const { setDayViewDate, showSchedule, setShowSchedule } =
     useContext(GlobalContext);
   function getCurrentDayClass() {
     return day.format("DD-MM-YY") === dayjs().format("DD-MM-YY")
@@ -12,8 +15,9 @@ export default function Day({ month, day, pageCount }) {
   }
 
   function getCurrentMonthClass() {
+    if (!month) month = day.format("M");
     return day.format("M") !==
-      dayjs(new Date(dayjs().year(), month)).format("M")
+      dayjs(new Date(dayjs().year(), month - 1)).format("M")
       ? "otherDay "
       : "";
   }
@@ -28,13 +32,13 @@ export default function Day({ month, day, pageCount }) {
           `${getCurrentDayClass()}`
         }
         onClick={() => {
-          showSchedule === "week" && setShowSchedule("day");
-          setNowDate(day);
+          navigation("/day" + day.format(`/YYYY/MM/${params.week}/DD`));
+          setDayViewDate(day);
         }}
       >
         {day.format("DD")}
       </p>
-      <div>{getCurrentMonthClass() === "" && pageCount}</div>
+      <div>{getCurrentMonthClass() === "" && pageCount > 0 && pageCount}</div>
     </div>
   );
 }

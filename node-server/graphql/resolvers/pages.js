@@ -41,7 +41,9 @@ module.exports = {
   Mutation: {
     async createPage(
       _,
-      { pageInput: { userId, title, date, text, parentIds, childIds } },
+      {
+        pageInput: { userId, title, date, text, pageType, parentIds, childIds },
+      },
       context
     ) {
       const { username } = checkAuth(context);
@@ -63,6 +65,7 @@ module.exports = {
             parent: parentIds,
             child: childIds,
             text: text ? text : "",
+            pageType,
             createdAt: new Date().toISOString(),
           });
           const resPages = await userPages.save();
@@ -93,7 +96,18 @@ module.exports = {
 
     async updatePage(
       _,
-      { pageInput: { userId, pageId, title, date, text, parentIds, childIds } },
+      {
+        pageInput: {
+          userId,
+          pageId,
+          title,
+          date,
+          text,
+          pageType,
+          parentIds,
+          childIds,
+        },
+      },
       context
     ) {
       // parentIds is full list which we want to change into
@@ -110,6 +124,7 @@ module.exports = {
           page.date = date;
           page.title = title;
           page.text = text;
+          page.pageType = pageType;
           if (parentIds) page.parent = parentIds;
           if (childIds) page.child = childIds;
 

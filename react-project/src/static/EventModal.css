@@ -5,20 +5,20 @@
   height: 300px;
 }
 
-.pageModal nav {
+.pageModal header {
   display: flex;
   flex-direction: row;
   margin-left: 20px;
 }
 
-.pageModal nav > div {
+.pageModal header > div {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 50px;
   margin-top: 6px;
   padding-bottom: 6px;
-  background-color: rgb(223, 223, 223);
+  background-color: rgb(255, 255, 255);
 }
 
 .pageModal nav > div:hover {
@@ -30,7 +30,7 @@
   flex-direction: column;
   height: 100%;
   width: 100%;
-  background-color: rgb(223, 223, 223);
+  background-color: rgb(255, 255, 255);
 }
 
 .pageModal main input {

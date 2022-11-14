@@ -37,6 +37,12 @@
   font-size: 23px;
   margin-left: 40px;
   margin-right: 25px;
+  text-decoration: none;
+  color: black;
+}
+
+.mainLogo:hover {
+  cursor: pointer;
 }
 
 .searchBar {

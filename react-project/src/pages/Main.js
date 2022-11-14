@@ -9,20 +9,36 @@ import EventModal from "../components/EventModal";
 import Week from "../components/Week";
 import DayView from "../components/DayView";
 import PageModal from "../components/PageModal";
+import { Route, Routes } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
 
 function Main() {
-  const { modalDate, showSchedule } = useContext(GlobalContext);
+  const { modalObj, showSchedule } = useContext(GlobalContext);
+  const navigate = useNavigate();
+  useEffect(() => {
+    navigate("month/" + dayjs().format("YYYY/MM"));
+  }, []);
 
   return (
     <Fragment>
-      {modalDate && (modalDate === "page" ? <PageModal /> : <PageDateModal />)}
+      {modalObj.type === "page" && <PageModal />}
+      {modalObj.type === "pageDate" && <PageDateModal />}
       <div className="app">
         <Nav />
         <div className="main">
           <div className="cal">
-            {showSchedule === "month" && <Month />}
-            {showSchedule === "week" && <Week />}
-            {showSchedule === "day" && <DayView />}
+            <Routes>
+              <Route path="/month/:year/:month" element={<Month />} />
+              <Route path="/week/:year/:month/:week" element={<Week />} />
+              <Route
+                path="/day/:year/:month/:week/:day"
+                element={<DayView />}
+              />
+            </Routes>
+            {/* {showSchedule === "month" && <Month />}
+              {showSchedule === "week" && <Week />}
+              {showSchedule === "day" && <DayView />} */}
           </div>
         </div>
         <SideTodo />

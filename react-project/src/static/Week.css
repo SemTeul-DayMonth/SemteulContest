@@ -59,3 +59,15 @@
 .cal_week_schedule div:last-child {
   border-right: 1px solid rgb(204, 204, 204);
 }
+
+.cal_week_schedule div .pageList p {
+  font-size: 15px;
+}
+
+.cal_week_schedule div .pageList button {
+  width: 90px;
+}
+
+.cal_week_schedule div .pageList .todo {
+  width: 90px;
+}

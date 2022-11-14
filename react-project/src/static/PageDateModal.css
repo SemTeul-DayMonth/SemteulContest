@@ -13,7 +13,7 @@
   position: fixed;
   background-color: rgb(255, 255, 255);
   width: 400px;
-  height: 200px;
+  height: 400px;
 }
 
 .bgModal header {
@@ -54,6 +54,7 @@
 }
 
 .bgModal main .titleInput {
+  width: 200px;
   margin-left: 20px;
   border: 0;
   border-bottom: 2px solid #7c68ee5d;

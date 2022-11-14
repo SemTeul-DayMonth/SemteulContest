@@ -9,26 +9,28 @@ import dayjs from "dayjs";
 import { useForm } from "../utils/hooks";
 
 export default function PageModal() {
-  const { modalDate, setModalDate } = useContext(GlobalContext);
+  const { modalObj, setModalObj } = useContext(GlobalContext);
   const { user } = useContext(AuthContext);
   const userId = user?.id;
 
   const { onChange, onSubmit, values } = useForm(createTdytd, {
     date: dayjs().format("YYYY-MM-DD").toString(),
     title: "",
+    parent: modalObj.parent ? modalObj.parent : [],
+    text: "",
     userId,
   });
 
   const [createPage] = useMutation(CREATE_PAGE, {
     onError(err) {
-      // console.log(err);
+      console.log(JSON.stringify(err, null, 2));
     },
     variables: values,
   });
 
   async function createTdytd() {
     createPage();
-    setModalDate("");
+    setModalObj({ type: "" });
   }
 
   return (
@@ -36,7 +38,10 @@ export default function PageModal() {
       <form action="" method="post" className="pageModal" onSubmit={onSubmit}>
         <header>
           <span className="grippy"></span>
-          <button className="close" onClick={() => setModalDate("")}></button>
+          <button
+            className="close"
+            onClick={() => setModalObj({ type: "" })}
+          ></button>
         </header>
         <main>
           <input
@@ -52,13 +57,33 @@ export default function PageModal() {
             type="date"
             name="date"
             value={values.date}
-            placeholder="Add Page"
+            placeholder="Add Page Title"
             onChange={onChange}
             className="dateInput"
             required
           />
+          <div className="pageContent">
+            <h3>contents</h3>
+            <input
+              type="text"
+              name="text"
+              value={values.text}
+              onChange={onChange}
+              placeholder="Add Text"
+              className="textInput"
+            />
+          </div>
+
+          <label>
+            <input type="radio" name="type" value="pageType" id="pageType" />
+            page
+          </label>
+          <label>
+            <input type="radio" name="type" value="todoType" id="todoType" />
+            todo
+          </label>
+          <button type="submit">save</button>
         </main>
-        <button type="submit">submit</button>
       </form>
     </div>
   );
@@ -81,6 +106,7 @@ const CREATE_PAGE = gql`
           childId
         }
         text
+        pageType
       }
       userId
       username

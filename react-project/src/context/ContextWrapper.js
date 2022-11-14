@@ -11,8 +11,12 @@ function initTodos() {
 export default function ContextWrapper(props) {
   const [monthIndex, setMonthIndex] = useState(dayjs().month());
   const [weekIndex, setWeekIndex] = useState(0);
-  const [nowDate, setNowDate] = useState(dayjs());
-  const [modalDate, setModalDate] = useState("");
+  const [dayViewDate, setDayViewDate] = useState(dayjs());
+  const [modalObj, setModalObj] = useState({
+    date: dayjs(),
+    type: "",
+    parent: "",
+  });
   const [showSchedule, setShowSchedule] = useState("month");
 
   return (
@@ -22,10 +26,10 @@ export default function ContextWrapper(props) {
         setMonthIndex,
         weekIndex,
         setWeekIndex,
-        nowDate,
-        setNowDate,
-        modalDate,
-        setModalDate,
+        dayViewDate,
+        setDayViewDate,
+        modalObj,
+        setModalObj,
         showSchedule,
         setShowSchedule,
       }}

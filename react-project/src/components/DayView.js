@@ -5,19 +5,28 @@ import { AuthContext } from "../context/auth";
 import { useForm } from "../utils/hooks";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import TodoList from "./TodoList";
+import PageList from "./PageList";
+import { useNavigate, useParams } from "react-router-dom";
 
 function DayView() {
-  const { nowDate, showSchedule, setShowSchedule } = useContext(GlobalContext);
-
+  const { dayViewDate, showSchedule, setShowSchedule } =
+    useContext(GlobalContext);
+  const navigation = useNavigate();
+  const params = useParams();
   return (
     <Fragment>
       <div className="cal_day_header">
-        <h2>{nowDate.format("YYYY MMM DD")}</h2>
-        <button onClick={() => setShowSchedule("week")}>back</button>
+        <h2>{dayViewDate.format("YYYY MMM DD")}</h2>
+        <button
+          onClick={() =>
+            navigation(`/week/${params.year}/${params.month}/${params.week}`)
+          }
+        >
+          back
+        </button>
       </div>
       <div className="cal_day_body">
-        <TodoList todoDate={nowDate} />
+        <PageList pageDate={dayViewDate} />
       </div>
     </Fragment>
   );

@@ -3,10 +3,10 @@ import { useContext } from "react";
 import GlobalContext from "../context/GlobalContext";
 
 export default function AddPageButton() {
-  const { setModalDate } = useContext(GlobalContext);
+  const { setModalObj } = useContext(GlobalContext);
 
   return (
-    <div onClick={() => setModalDate("page")} className="addEvtBtn">
+    <div onClick={() => setModalObj({ type: "page" })} className="addEvtBtn">
       +
     </div>
   );

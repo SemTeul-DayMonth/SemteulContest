@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-const FETCH_TODOS_QUERY = gql`
+export const FETCH_TODOS_QUERY = gql`
   query GetPages($userId: ID!) {
     getPages(userId: $userId) {
       id
@@ -17,9 +17,8 @@ const FETCH_TODOS_QUERY = gql`
           childId
         }
         text
+        pageType
       }
     }
   }
 `;
-
-export default FETCH_TODOS_QUERY;

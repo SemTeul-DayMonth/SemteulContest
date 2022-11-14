@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "concurrently": "^7.5.0"
+  },
+  "scripts": {
+    "backend": "nodemon node-server/index",
+    "dev": "concurrently \"npm run backend\" \"npm run start --prefix react-project\""
+  }
+}

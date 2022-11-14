@@ -3,8 +3,7 @@ import GlobalContext from "../context/GlobalContext";
 import { useContext, useState } from "react";
 
 export default function EventModal() {
-  const { modalDate, setModalDate, dispatchCalTodo } =
-    useContext(GlobalContext);
+  const { modalObj, setModalObj, dispatchCalTodo } = useContext(GlobalContext);
   const [title, setTitle] = useState("");
 
   function handleSubmit(e) {
@@ -13,7 +12,7 @@ export default function EventModal() {
       title,
     };
     dispatchCalTodo({ type: "push", payload: todoPayload });
-    setModalDate("");
+    setModalObj({ type: "" });
   }
 
   return (
@@ -24,7 +23,10 @@ export default function EventModal() {
             <div>todo</div>
             <div>repo</div>
           </nav>
-          <button className="close" onClick={() => setModalDate("")}></button>
+          <button
+            className="close"
+            onClick={() => setModalObj({ type: "" })}
+          ></button>
         </header>
         <main>
           <input type="text" />
