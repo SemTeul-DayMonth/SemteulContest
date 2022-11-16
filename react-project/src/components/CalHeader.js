@@ -13,7 +13,6 @@ export default function CalHeader({ mode, prevWeekCount, currentMonth }) {
   function prev_week() {
     week -= 1;
     if (week < 0) {
-      console.log(prevWeekCount, week);
       week = prevWeekCount - 2;
       month -= 1;
       if (month < 1) {
@@ -23,7 +22,6 @@ export default function CalHeader({ mode, prevWeekCount, currentMonth }) {
     }
   }
   function next_week() {
-    console.log(currentMonth);
     if (currentMonth[week][0] < currentMonth[week + 1][0]) {
       week += 1;
     } else {
@@ -61,7 +59,6 @@ export default function CalHeader({ mode, prevWeekCount, currentMonth }) {
           onClick={() => {
             if (mode === "week") {
               prev_week();
-              console.log("div", week);
               navigate(`/week/${year}/${month}/${week}`);
             }
             if (mode === "month") {

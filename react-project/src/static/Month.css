@@ -82,11 +82,11 @@
   height: calc(200px / 6);
 }
 
-.weekDays .day:first-child {
+.weekDays .day:first-childs {
   color: rgba(228, 4, 4, 0.712);
 }
 
-.weekDays .day:last-child {
+.weekDays .day:last-childs {
   color: rgba(1, 1, 218, 0.651);
 }
 
@@ -193,10 +193,10 @@
     color: rgb(146, 146, 146);
   }
   
-  .cal_month .day:nth-child(7n) {
+  .cal_month .day:nth-childs(7n) {
     color: #486ed7;
   }
   
-  .cal_month .day:nth-child(7n+1) {
+  .cal_month .day:nth-childs(7n+1) {
     color: #db5178;
   } */

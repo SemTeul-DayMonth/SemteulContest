@@ -18,14 +18,18 @@ const pageSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: "pages",
           },
+          parentDate: String,
+          parentTitle: String,
         },
       ],
-      child: [
+      childs: [
         {
           childId: {
             type: Schema.Types.ObjectId,
             ref: "pages",
           },
+          childDate: String,
+          childTitle: String,
         },
       ],
       pageType: String,

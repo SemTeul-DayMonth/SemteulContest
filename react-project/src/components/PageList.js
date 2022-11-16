@@ -48,7 +48,7 @@ export default function PageList({ pageDate }) {
     deletePage();
   }
 
-  async function onClickFn(e) {
+  async function onDelete(e) {
     await onChange(e);
     onSubmit(e);
   }
@@ -64,11 +64,13 @@ export default function PageList({ pageDate }) {
       ) : pageList.length !== 0 ? (
         pageList.map((page, i) => (
           <div className="todo" key={i}>
-            <p>{page.title}</p>
+            <p onClick={() => setModalObj({ type: "pageView", page })}>
+              {page.title}
+            </p>
             <button
               name="pageId"
               value={page.id}
-              onClick={onClickFn}
+              onClick={onDelete}
               type="submit"
             >
               -
@@ -77,7 +79,13 @@ export default function PageList({ pageDate }) {
               onClick={() =>
                 setModalObj({
                   date: pageDate,
-                  parent: [{ parentId: page.id }],
+                  parent: [
+                    {
+                      parentId: page.id,
+                      parentDate: page.date,
+                      parentTitle: page.title,
+                    },
+                  ],
                   type: "pageDate",
                 })
               }
@@ -117,9 +125,13 @@ const DELETE_PAGE = gql`
         isDone
         parent {
           parentId
+          parentTitle
+          parentDate
         }
-        child {
+        childs {
           childId
+          childDate
+          childTitle
         }
         text
         pageType

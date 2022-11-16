@@ -12,9 +12,13 @@ export const FETCH_TODOS_QUERY = gql`
         isDone
         parent {
           parentId
+          parentDate
+          parentTitle
         }
-        child {
+        childs {
           childId
+          childDate
+          childTitle
         }
         text
         pageType

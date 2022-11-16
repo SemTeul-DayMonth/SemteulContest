@@ -15,15 +15,18 @@ export default function PageDateModal() {
   const { user } = useContext(AuthContext);
   const userId = user?.id;
   const [prntTitle, setPrntTitle] = useState("");
-  let pageList = [];
-  const [prntList, setPrntList] = useState([]);
-  let prntIdList = [];
+  const [childTitle, setChildTitle] = useState("");
+  let prntPageList = [];
+  let childPageList = [];
+  const [prntList, setPrntList] = useState(modalObj.parent || []);
+  const [childList, setChildList] = useState(modalObj.child || []);
 
-  const { onChange, onSubmit, values } = useForm(createTdytd, {
+  const { onChange, onSubmit, values } = useForm(createPageCb, {
     date: modalObj.date.format("YYYY-MM-DD").toString(),
     title: "",
     pageType: "page",
-    parentIds: prntIdList,
+    parentInput: prntList,
+    childInput: childList,
     text: "",
     userId,
   });
@@ -35,9 +38,9 @@ export default function PageDateModal() {
     variables: values,
   });
 
-  async function createTdytd() {
-    prntIdList = prntList.map(({ id }) => ({ parentId: id }));
-    values.parentIds = prntIdList;
+  async function createPageCb() {
+    values.parentInput = prntList;
+    values.childInput = childList;
     console.log(values);
     createPage();
     setModalObj({ type: "" });
@@ -48,16 +51,36 @@ export default function PageDateModal() {
   });
 
   if (data && prntTitle) {
-    pageList = data.getPages.pages.filter(({ title }) =>
+    prntPageList = data.getPages.pages.filter(({ title }) =>
       title.includes(prntTitle)
+    );
+  }
+
+  if (data && childTitle) {
+    childPageList = data.getPages.pages.filter(({ title }) =>
+      title.includes(childTitle)
     );
   }
 
   function addPrnt(checked, title, date, id) {
     if (checked) {
-      setPrntList([...prntList, { title, date, id }]);
+      setPrntList([
+        ...prntList,
+        { parentTitle: title, parentDate: date, parentId: id },
+      ]);
     } else {
-      setPrntList(prntList.filter((prnt) => prnt.id !== id));
+      setPrntList(prntList.filter(({ parentId }) => parentId !== id));
+    }
+  }
+
+  function addChild(checked, title, date, id) {
+    if (checked) {
+      setChildList([
+        ...childList,
+        { childTitle: title, childDate: date, childId: id },
+      ]);
+    } else {
+      setChildList(childList.filter(({ childId }) => childId !== id));
     }
   }
 
@@ -87,20 +110,52 @@ export default function PageDateModal() {
             className="titleInput"
             required
           />
-          {prntList.map((page, i) => (
-            <div key={i}>
-              <p>{page.title}</p>
-              <p>{page.date}</p>
-              <input
-                type="checkbox"
-                checked={prntList.some(({ id }) => id === page.id)}
-                name={page.id}
-                onChange={(e) => {
-                  addPrnt(e.target.checked, page.title, page.date, page.id);
-                }}
-              />
+          {(prntList.length !== 0 || childList.length !== 0) && (
+            <div className="relevantPages">
+              {prntList.length !== 0 && <p>Parent Pages</p>}
+              {prntList.map((page, i) => (
+                <div className="todo" key={i}>
+                  <p>{page.parentTitle}</p>
+                  <p>{dayjs(page.parentDate).format("YYYY-MM-DD")}</p>
+                  <input
+                    type="checkbox"
+                    checked={prntList.some(
+                      ({ parentId }) => parentId === page.parentId
+                    )}
+                    onChange={(e) => {
+                      addPrnt(
+                        e.target.checked,
+                        page.parentTitle,
+                        page.parentDate,
+                        page.parentId
+                      );
+                    }}
+                  />
+                </div>
+              ))}
+              {childList.length !== 0 && <p>Child Pages</p>}
+              {childList.map((page, i) => (
+                <div className="todo" key={i}>
+                  <p>{page.childTitle}</p>
+                  <p>{dayjs(page.childDate).format("YYYY-MM-DD")}</p>
+                  <input
+                    type="checkbox"
+                    checked={childList.some(
+                      ({ childId }) => childId === page.childId
+                    )}
+                    onChange={(e) => {
+                      addChild(
+                        e.target.checked,
+                        page.childTitle,
+                        page.childDate,
+                        page.childId
+                      );
+                    }}
+                  />
+                </div>
+              ))}
             </div>
-          ))}
+          )}
           {prntList.length === 0 && <p>Select Parent</p>}
           <input
             type="search"
@@ -109,13 +164,13 @@ export default function PageDateModal() {
             onChange={(e) => setPrntTitle(e.target.value)}
             placeholder="Search Parent"
           />
-          {pageList.map((page, i) => (
-            <div key={i}>
+          {prntPageList.map((page, i) => (
+            <div className="todo" key={i}>
               <p>{page.title}</p>
-              <p>{page.date}</p>
+              <p>{dayjs(page.childDate).format("YYYY-MM-DD")}</p>
               <input
                 type="checkbox"
-                checked={prntList.some(({ id }) => id === page.id)}
+                checked={prntList.some(({ parentId }) => parentId === page.id)}
                 name={page.id}
                 onChange={(e) => {
                   addPrnt(e.target.checked, page.title, page.date, page.id);
@@ -123,6 +178,30 @@ export default function PageDateModal() {
               />
             </div>
           ))}
+
+          {childList.length === 0 && <p>Select Child</p>}
+          <input
+            type="search"
+            name=""
+            value={childTitle}
+            onChange={(e) => setChildTitle(e.target.value)}
+            placeholder="Search Child"
+          />
+          {childPageList.map((page, i) => (
+            <div className="todo" key={i}>
+              <p>{page.title}</p>
+              <p>{dayjs(page.childDate).format("YYYY-MM-DD")}</p>
+              <input
+                type="checkbox"
+                checked={childList.some(({ childId }) => childId === page.id)}
+                name={page.id}
+                onChange={(e) => {
+                  addChild(e.target.checked, page.title, page.date, page.id);
+                }}
+              />
+            </div>
+          ))}
+
           <div className="pageContent">
             <h4>contents</h4>
             <input
@@ -165,7 +244,8 @@ const CREATE_PAGE = gql`
     $date: String!
     $title: String!
     $userId: ID!
-    $parentIds: [ParentIds]
+    $parentInput: [ParentInput]
+    $childInput: [ChildInput]
     $pageType: String!
   ) {
     createPage(
@@ -173,7 +253,8 @@ const CREATE_PAGE = gql`
         date: $date
         title: $title
         userId: $userId
-        parentIds: $parentIds
+        parentInput: $parentInput
+        childInput: $childInput
         pageType: $pageType
       }
     ) {
@@ -186,9 +267,13 @@ const CREATE_PAGE = gql`
         createdAt
         parent {
           parentId
+          parentTitle
+          parentDate
         }
-        child {
+        childs {
           childId
+          childDate
+          childTitle
         }
         text
         pageType

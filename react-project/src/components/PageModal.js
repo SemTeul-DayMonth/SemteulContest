@@ -1,22 +1,28 @@
-import "../static/PageModal.css";
+import "../static/PageDateModal.css";
 import GlobalContext from "../context/GlobalContext";
+import { useQuery } from "@apollo/client";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
-import { useContext, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth";
 import dayjs from "dayjs";
 import { useForm } from "../utils/hooks";
+import { FETCH_TODOS_QUERY } from "../utils/querys";
 
 export default function PageModal() {
   const { modalObj, setModalObj } = useContext(GlobalContext);
   const { user } = useContext(AuthContext);
   const userId = user?.id;
+  const [prntTitle, setPrntTitle] = useState("");
+  let pageList = [];
+  const [prntList, setPrntList] = useState([]);
 
-  const { onChange, onSubmit, values } = useForm(createTdytd, {
+  const { onChange, onSubmit, values } = useForm(createPageCb, {
     date: dayjs().format("YYYY-MM-DD").toString(),
     title: "",
-    parent: modalObj.parent ? modalObj.parent : [],
+    pageType: "page",
+    parentInput: prntList,
     text: "",
     userId,
   });
@@ -28,9 +34,28 @@ export default function PageModal() {
     variables: values,
   });
 
-  async function createTdytd() {
+  async function createPageCb() {
+    values.parentInput = prntList;
     createPage();
     setModalObj({ type: "" });
+  }
+
+  const { error, data } = useQuery(FETCH_TODOS_QUERY, {
+    variables: { userId },
+  });
+
+  if (data && prntTitle) {
+    pageList = data.getPages.pages.filter(({ title }) =>
+      title.includes(prntTitle)
+    );
+  }
+
+  function addPrnt(checked, title, date, id) {
+    if (checked) {
+      setPrntList([...prntList, { title, date, id }]);
+    } else {
+      setPrntList(prntList.filter((prnt) => prnt.id !== id));
+    }
   }
 
   return (
@@ -102,7 +127,7 @@ const CREATE_PAGE = gql`
         parent {
           parentId
         }
-        child {
+        childs {
           childId
         }
         text
