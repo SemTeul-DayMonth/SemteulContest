@@ -10,7 +10,7 @@ import dayjs from "dayjs";
 import { FETCH_TODOS_QUERY } from "../utils/querys";
 
 export default function PageList({ pageDate }) {
-  const { setModalObj } = useContext(GlobalContext);
+  const { modalObj, setModalObj } = useContext(GlobalContext);
   const { user } = useContext(AuthContext);
   const userId = user?.id;
   let pageList = [];
@@ -21,7 +21,7 @@ export default function PageList({ pageDate }) {
     }
   }, [user]);
 
-  const { error, data } = useQuery(FETCH_TODOS_QUERY, {
+  const { error, data, refetch } = useQuery(FETCH_TODOS_QUERY, {
     variables: { userId },
   });
 
@@ -64,7 +64,7 @@ export default function PageList({ pageDate }) {
       ) : pageList.length !== 0 ? (
         pageList.map((page, i) => (
           <div className="todo" key={i}>
-            <p onClick={() => setModalObj({ type: "pageView", page })}>
+            <p onClick={() => setModalObj({ type: "pageView", page, refetch })}>
               {page.title}
             </p>
             <button

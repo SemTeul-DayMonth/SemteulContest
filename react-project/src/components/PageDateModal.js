@@ -41,7 +41,6 @@ export default function PageDateModal() {
   async function createPageCb() {
     values.parentInput = prntList;
     values.childInput = childList;
-    console.log(values);
     createPage();
     setModalObj({ type: "" });
   }
@@ -51,14 +50,18 @@ export default function PageDateModal() {
   });
 
   if (data && prntTitle) {
-    prntPageList = data.getPages.pages.filter(({ title }) =>
-      title.includes(prntTitle)
+    prntPageList = data.getPages.pages.filter(
+      ({ title, id }) =>
+        title.includes(prntTitle) &&
+        childList.filter(({ childId }) => childId === id).length === 0
     );
   }
 
   if (data && childTitle) {
-    childPageList = data.getPages.pages.filter(({ title }) =>
-      title.includes(childTitle)
+    childPageList = data.getPages.pages.filter(
+      ({ title, id }) =>
+        title.includes(childTitle) &&
+        prntList.filter(({ parentId }) => parentId === id).length === 0
     );
   }
 
@@ -167,7 +170,7 @@ export default function PageDateModal() {
           {prntPageList.map((page, i) => (
             <div className="todo" key={i}>
               <p>{page.title}</p>
-              <p>{dayjs(page.childDate).format("YYYY-MM-DD")}</p>
+              <p>{dayjs(page.date).format("YYYY-MM-DD")}</p>
               <input
                 type="checkbox"
                 checked={prntList.some(({ parentId }) => parentId === page.id)}
@@ -190,7 +193,7 @@ export default function PageDateModal() {
           {childPageList.map((page, i) => (
             <div className="todo" key={i}>
               <p>{page.title}</p>
-              <p>{dayjs(page.childDate).format("YYYY-MM-DD")}</p>
+              <p>{dayjs(page.date).format("YYYY-MM-DD")}</p>
               <input
                 type="checkbox"
                 checked={childList.some(({ childId }) => childId === page.id)}

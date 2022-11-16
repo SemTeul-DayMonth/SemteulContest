@@ -46,6 +46,9 @@ export default function PageView() {
   });
 
   const [updatePage] = useMutation(UPDATE_PAGE, {
+    onCompleted() {
+      modalObj.refetch({ userId });
+    },
     onError(err) {
       console.log(JSON.stringify(err, null, 2));
     },
@@ -55,9 +58,8 @@ export default function PageView() {
   async function updatePageCb() {
     values.parentInput = prntList;
     values.childInput = childList;
-    console.log(values, prntList);
     updatePage();
-    setModalObj({ type: "" });
+    setModalObj({ type: "", isMutation: true });
   }
 
   const { error, data } = useQuery(FETCH_TODOS_QUERY, {
@@ -66,13 +68,19 @@ export default function PageView() {
 
   if (data && prntTitle) {
     prntPageList = data.getPages.pages.filter(
-      ({ title, id }) => title.includes(prntTitle) && id !== nowPage.id
+      ({ title, id }) =>
+        title.includes(prntTitle) &&
+        childList.filter(({ childId }) => childId === id).length === 0 &&
+        id !== nowPage.id
     );
   }
 
   if (data && childTitle) {
     childPageList = data.getPages.pages.filter(
-      ({ title, id }) => title.includes(childTitle) && id !== nowPage.id
+      ({ title, id }) =>
+        title.includes(childTitle) &&
+        prntList.filter(({ parentId }) => parentId === id).length === 0 &&
+        id !== nowPage.id
     );
   }
 
@@ -124,6 +132,7 @@ export default function PageView() {
             className="titleInput"
             required
           />
+          <p>{dayjs(nowPage.date).format("YYYY-MM-DD")}</p>
           {(prntList.length !== 0 || childList.length !== 0) && (
             <div className="relevantPages">
               {prntList.length !== 0 && <p>Parent Pages</p>}
@@ -182,7 +191,7 @@ export default function PageView() {
           {prntPageList.map((page, i) => (
             <div className="todo" key={i}>
               <p>{page.title}</p>
-              <p>{dayjs(page.childDate).format("YYYY-MM-DD")}</p>
+              <p>{dayjs(page.date).format("YYYY-MM-DD")}</p>
               <input
                 type="checkbox"
                 checked={prntList.some(({ parentId }) => parentId === page.id)}
@@ -205,7 +214,7 @@ export default function PageView() {
           {childPageList.map((page, i) => (
             <div className="todo" key={i}>
               <p>{page.title}</p>
-              <p>{dayjs(page.childDate).format("YYYY-MM-DD")}</p>
+              <p>{dayjs(page.date).format("YYYY-MM-DD")}</p>
               <input
                 type="checkbox"
                 checked={childList.some(({ childId }) => childId === page.id)}
