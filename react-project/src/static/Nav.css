@@ -58,13 +58,13 @@
   border-radius: 25px;
 }
 
-.search {
+.nav .search {
   border: 0;
   width: 320px;
   margin-left: 10px;
 }
 
-.search::placeholder {
+.nav .search::placeholder {
   color: #7b68ee;
   font-size: 15px;
 }
