@@ -28,7 +28,8 @@ export default function PageList({ pageDate }) {
   if (data) {
     pageList = data.getPages.pages.filter(
       ({ date }) =>
-        dayjs(date).format("YYYY-MM-DD") === pageDate.format("YYYY-MM-DD")
+        dayjs(date).format("YYYY-MM-DD") ===
+        dayjs(pageDate).format("YYYY-MM-DD")
     );
   }
 
@@ -86,7 +87,7 @@ export default function PageList({ pageDate }) {
                       parentTitle: page.title,
                     },
                   ],
-                  type: "pageDate",
+                  type: "page",
                 })
               }
             >
@@ -102,7 +103,7 @@ export default function PageList({ pageDate }) {
         onClick={() =>
           setModalObj({
             date: pageDate,
-            type: "pageDate",
+            type: "page",
           })
         }
       >

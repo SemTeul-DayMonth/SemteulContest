@@ -1,4 +1,4 @@
-import "../static/PageDateModal.css";
+import "../static/PageModal.css";
 import GlobalContext from "../context/GlobalContext";
 import { useQuery } from "@apollo/client";
 import { useMutation } from "@apollo/react-hooks";
@@ -14,11 +14,17 @@ export default function PageView() {
   const { modalObj, setModalObj } = useContext(GlobalContext);
   const { user } = useContext(AuthContext);
   const userId = user?.id;
+  const nowPage = modalObj.page;
+  const nowPageDate = nowPage.date.split(" ");
+  const [pageTime, setPageTime] = useState(
+    nowPageDate.length === 1 ? dayjs().format("HH:mm") : nowPageDate[1]
+  );
+  const [isCheckedTime, setIsCheckedTime] = useState(nowPageDate.length !== 1);
   const [prntTitle, setPrntTitle] = useState("");
   const [childTitle, setChildTitle] = useState("");
   let prntPageList = [];
   let childPageList = [];
-  const nowPage = modalObj.page;
+
   const nowParent = nowPage.parent.map(
     ({ parentId, parentTitle, parentDate }) => ({
       parentId,
@@ -58,6 +64,9 @@ export default function PageView() {
   async function updatePageCb() {
     values.parentInput = prntList;
     values.childInput = childList;
+    values.date = isCheckedTime
+      ? nowPageDate[0] + " " + pageTime
+      : nowPageDate[0];
     updatePage();
     setModalObj({ type: "", isMutation: true });
   }
@@ -132,6 +141,26 @@ export default function PageView() {
             className="titleInput"
             required
           />
+
+          <label>
+            <input
+              type="checkbox"
+              checked={isCheckedTime}
+              onChange={(e) => setIsCheckedTime(e.target.checked)}
+            />
+            time
+          </label>
+
+          {isCheckedTime && (
+            <input
+              type="time"
+              name=""
+              value={pageTime}
+              onChange={(e) => setPageTime(e.target.value)}
+              id=""
+            />
+          )}
+
           <p>{dayjs(nowPage.date).format("YYYY-MM-DD")}</p>
           {(prntList.length !== 0 || childList.length !== 0) && (
             <div className="relevantPages">

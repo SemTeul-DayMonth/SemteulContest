@@ -68,7 +68,7 @@ module.exports = {
         if (userPages.pages) {
           userPages.pages.unshift({
             title,
-            date: new Date(date).toISOString(),
+            date,
             isDone: false,
             parent: parentInput,
             childs: childInput,
