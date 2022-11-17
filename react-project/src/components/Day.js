@@ -36,7 +36,7 @@ export default function Day({ month, day, pageCount }) {
           setDayViewDate(day);
         }}
       >
-        {day.format("DD")}
+        {day.format("D")}
       </p>
       <div>{getCurrentMonthClass() === "" && pageCount > 0 && pageCount}</div>
     </div>
