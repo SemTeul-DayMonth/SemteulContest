@@ -11,7 +11,7 @@ import { getPageCounts } from "../utils/util";
 import { useNavigate, useParams } from "react-router-dom";
 import CalHeader from "./CalHeader";
 
-const weekDays = ["SON", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+const weekDays = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
 export default function Month() {
   const params = useParams();
