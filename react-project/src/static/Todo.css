@@ -18,6 +18,7 @@
   margin-bottom: 20px;
   margin-top: 20px;
   font-family: "Distant Galaxy", sans-serif;
+  -webkit-transform: scale(1, 1.2);
 }
 
 .addPageBtn {

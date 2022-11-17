@@ -73,6 +73,7 @@
   height: calc(300px / 6);
   align-items: center;
   justify-content: center;
+  font-family: "Distant Galaxy", sans-serif;
 }
 
 .weekDays .day {
@@ -97,6 +98,7 @@
   align-items: center;
   justify-content: center;
   font-weight: 600;
+  font-family: "Distant Galaxy", sans-serif;
 }
 
 .cal_month .selectedAssignDay {
