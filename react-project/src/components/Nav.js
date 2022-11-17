@@ -1,5 +1,5 @@
 import "../static/Nav.css";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/auth";
 import { useNavigate } from "react-router-dom";
 import GlobalContext from "../context/GlobalContext";
@@ -8,7 +8,7 @@ import dayjs from "dayjs";
 export default function Nav() {
   const user = useContext(AuthContext);
   const navigate = useNavigate();
-  const { setShowSchedule } = useContext(GlobalContext);
+  const { pageMode, setPageMode } = useContext(GlobalContext);
 
   function logout() {
     user.logout();
@@ -41,7 +41,12 @@ export default function Nav() {
           </React.Fragment>
         )}
 
-        <div className="modeSwitch">to-do</div>
+        <div
+          onClick={() => setPageMode(pageMode === "page" ? "todo" : "page")}
+          className="modeSwitch"
+        >
+          {pageMode}
+        </div>
         <a href="" className="settingsLink">
           settings
         </a>

@@ -166,7 +166,7 @@ export default function PageView() {
             <div className="relevantPages">
               {prntList.length !== 0 && <p>Parent Pages</p>}
               {prntList.map((page, i) => (
-                <div className="todo" key={i}>
+                <div className="pageCell" key={i}>
                   <p>{page.parentTitle}</p>
                   <p>{dayjs(page.parentDate).format("YYYY-MM-DD")}</p>
                   <input
@@ -187,7 +187,7 @@ export default function PageView() {
               ))}
               {childList.length !== 0 && <p>Child Pages</p>}
               {childList.map((page, i) => (
-                <div className="todo" key={i}>
+                <div className="pageCell" key={i}>
                   <p>{page.childTitle}</p>
                   <p>{dayjs(page.childDate).format("YYYY-MM-DD")}</p>
                   <input
@@ -218,7 +218,7 @@ export default function PageView() {
             placeholder="Search Parent"
           />
           {prntPageList.map((page, i) => (
-            <div className="todo" key={i}>
+            <div className="pageCell" key={i}>
               <p>{page.title}</p>
               <p>{dayjs(page.date).format("YYYY-MM-DD")}</p>
               <input
@@ -241,7 +241,7 @@ export default function PageView() {
             placeholder="Search Child"
           />
           {childPageList.map((page, i) => (
-            <div className="todo" key={i}>
+            <div className="pageCell" key={i}>
               <p>{page.title}</p>
               <p>{dayjs(page.date).format("YYYY-MM-DD")}</p>
               <input

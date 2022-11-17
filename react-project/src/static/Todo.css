@@ -18,13 +18,13 @@
   width: 200px;
 }
 
-.todoList {
+.pageCellList {
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
-.todo {
+.pageCell {
   height: 30px;
   width: 200px;
   display: flex;
@@ -37,12 +37,12 @@
   box-shadow: #efefef 2px 2px 4px 1px;
 }
 
-.todo p {
+.pageCell p {
   margin: 0;
   margin-left: 20px;
 }
 
-.todo button {
+.pageCell button {
   margin-right: 10px;
   background-color: #fff;
   border: 0;
@@ -50,6 +50,13 @@
   cursor: pointer;
   font-size: 20px;
   color: #7b68ee;
+}
+
+.prntPageCell {
+  height: 20px;
+  width: 150px;
+  transform: translateX(-17px);
+  background-color: rgb(193, 193, 193);
 }
 
 .addEvtBtn {

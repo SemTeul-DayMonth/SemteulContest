@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { Fragment, useContext, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { useMutation } from "@apollo/react-hooks";
 
@@ -10,7 +10,7 @@ import dayjs from "dayjs";
 import { FETCH_TODOS_QUERY } from "../utils/querys";
 
 export default function PageList({ pageDate }) {
-  const { modalObj, setModalObj } = useContext(GlobalContext);
+  const { pageMode, modalObj, setModalObj } = useContext(GlobalContext);
   const { user } = useContext(AuthContext);
   const userId = user?.id;
   let pageList = [];
@@ -27,9 +27,10 @@ export default function PageList({ pageDate }) {
 
   if (data) {
     pageList = data.getPages.pages.filter(
-      ({ date }) =>
+      ({ date, pageType }) =>
         dayjs(date).format("YYYY-MM-DD") ===
-        dayjs(pageDate).format("YYYY-MM-DD")
+          dayjs(pageDate).format("YYYY-MM-DD") &&
+        (pageMode === "todo" ? pageType === pageMode : true)
     );
   }
 
@@ -54,6 +55,71 @@ export default function PageList({ pageDate }) {
     onSubmit(e);
   }
 
+  function PrntPageCell({ page }) {
+    return (
+      <div className={"prntPageCell " + "pageCell"}>
+        <p onClick={() => setModalObj({ type: "pageView", page, refetch })}>
+          {page.parentTitle}
+        </p>
+        <button
+          name="pageId"
+          value={page.parentId}
+          onClick={onDelete}
+          type="submit"
+        >
+          -
+        </button>
+        <button
+          onClick={() =>
+            setModalObj({
+              date: pageDate,
+              parent: [
+                {
+                  parentId: page.parentId,
+                  parentDate: page.parentDate,
+                  parentTitle: page.parentTitle,
+                },
+              ],
+              type: "page",
+            })
+          }
+        >
+          +
+        </button>
+      </div>
+    );
+  }
+
+  function PageCell({ page }) {
+    return (
+      <div className="pageCell">
+        <p onClick={() => setModalObj({ type: "pageView", page, refetch })}>
+          {page.title}
+        </p>
+        <button name="pageId" value={page.id} onClick={onDelete} type="submit">
+          -
+        </button>
+        <button
+          onClick={() =>
+            setModalObj({
+              date: pageDate,
+              parent: [
+                {
+                  parentId: page.id,
+                  parentDate: page.date,
+                  parentTitle: page.title,
+                },
+              ],
+              type: "page",
+            })
+          }
+        >
+          +
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className="pageList">
       {error ? (
@@ -64,35 +130,9 @@ export default function PageList({ pageDate }) {
         )
       ) : pageList.length !== 0 ? (
         pageList.map((page, i) => (
-          <div className="todo" key={i}>
-            <p onClick={() => setModalObj({ type: "pageView", page, refetch })}>
-              {page.title}
-            </p>
-            <button
-              name="pageId"
-              value={page.id}
-              onClick={onDelete}
-              type="submit"
-            >
-              -
-            </button>
-            <button
-              onClick={() =>
-                setModalObj({
-                  date: pageDate,
-                  parent: [
-                    {
-                      parentId: page.id,
-                      parentDate: page.date,
-                      parentTitle: page.title,
-                    },
-                  ],
-                  type: "page",
-                })
-              }
-            >
-              +
-            </button>
+          <div className="familyPage" key={i}>
+            {page.parent[0] && <PrntPageCell page={page.parent[0]} />}
+            <PageCell page={page} />
           </div>
         ))
       ) : (

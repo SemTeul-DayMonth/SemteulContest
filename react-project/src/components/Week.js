@@ -17,6 +17,7 @@ export default function Week() {
   let yearIndex = Number(params.year);
   let monthIndex = Number(params.month);
   let weekIndex = Number(params.week);
+  const { pageMode } = useContext(GlobalContext);
   const { user } = useContext(AuthContext);
   const userId = user?.id;
   const weekDays = ["SON", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
@@ -35,7 +36,7 @@ export default function Week() {
     variables: { userId },
   });
 
-  const pageCounts = getPageCounts(data, currentDate);
+  const pageCounts = getPageCounts(pageMode, data, currentDate);
 
   function prev_week() {
     weekIndex -= 1;
@@ -87,25 +88,39 @@ export default function Week() {
       </div>
       <div className="cal_week_schedule">
         <div className="sonSche">
-          <PageList pageDate={currentMonth[weekIndex][0]} />
+          <PageList
+            pageDate={currentMonth[weekIndex][0].format("YYYY-MM-DD")}
+          />
         </div>
         <div className="monSche">
-          <PageList pageDate={currentMonth[weekIndex][1]} />
+          <PageList
+            pageDate={currentMonth[weekIndex][1].format("YYYY-MM-DD")}
+          />
         </div>
         <div className="tueSche">
-          <PageList pageDate={currentMonth[weekIndex][2]} />
+          <PageList
+            pageDate={currentMonth[weekIndex][2].format("YYYY-MM-DD")}
+          />
         </div>
         <div className="wedSche">
-          <PageList pageDate={currentMonth[weekIndex][3]} />
+          <PageList
+            pageDate={currentMonth[weekIndex][3].format("YYYY-MM-DD")}
+          />
         </div>
         <div className="thuSche">
-          <PageList pageDate={currentMonth[weekIndex][4]} />
+          <PageList
+            pageDate={currentMonth[weekIndex][4].format("YYYY-MM-DD")}
+          />
         </div>
         <div className="friSche">
-          <PageList pageDate={currentMonth[weekIndex][5]} />
+          <PageList
+            pageDate={currentMonth[weekIndex][5].format("YYYY-MM-DD")}
+          />
         </div>
         <div className="satSche">
-          <PageList pageDate={currentMonth[weekIndex][6]} />
+          <PageList
+            pageDate={currentMonth[weekIndex][6].format("YYYY-MM-DD")}
+          />
         </div>
       </div>
     </Fragment>
