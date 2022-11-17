@@ -1,5 +1,6 @@
 /* to-do */
 .todayTodo {
+  background-color: #ffffff;
   grid-area: todayToDo;
   display: flex;
   flex-direction: column;
