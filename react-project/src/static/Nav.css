@@ -62,6 +62,7 @@
   border: 0;
   width: 320px;
   margin-left: 10px;
+  align-items: center;
 }
 
 .search::placeholder {

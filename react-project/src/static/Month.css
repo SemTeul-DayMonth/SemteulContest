@@ -73,7 +73,7 @@
   height: calc(300px / 6);
   align-items: center;
   justify-content: center;
-  font-family: "Arimo", sans-serif;
+  font-family: Arimo;
 }
 
 .weekDays .day {
@@ -98,7 +98,7 @@
   align-items: center;
   justify-content: center;
   font-weight: 600;
-  font-family: "Arimo", sans-serif;
+  font-family: Arimo;
 }
 
 .cal_month .selectedAssignDay {
