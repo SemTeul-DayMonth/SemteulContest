@@ -38,10 +38,13 @@ export default function Repository() {
   return (
     <div className="repo">
       <nav>
-        <button onClick={() => navigate("/month/" + dayjs().format("YYYY/MM"))}>
+        <div className="navBox">
+          <button onClick={() => navigate("/month/" + dayjs().format("YYYY/MM"))}>
           X
-        </button>
-        <button onClick={() => navigate(-1)}>back</button>
+          </button>
+          <button onClick={() => navigate(-1)}>&#60;</button>
+        </div>
+        
       </nav>
       <main>
         {indexs[0]
@@ -62,13 +65,13 @@ export default function Repository() {
                     setModalObj({ type: "pageView", page, refetch })
                   }
                 >
-                  +
+                  
                 </div>
               </div>
             ))
           : defaultPageList.map((page, i) => (
               <div className="repoCell" key={i}>
-                <div
+                <div className="childPageListButton"
                   onClick={() => {
                     navigate(String(i), { state: page.childs });
                   }}
@@ -76,12 +79,15 @@ export default function Repository() {
                 >
                   {page.title}
                 </div>
-                <div
+                <div className="pageViewButton"
                   onClick={() =>
                     setModalObj({ type: "pageView", page, refetch })
                   }
                 >
-                  +
+                  &#07;
+                </div>
+                <div className="pageListDate">
+                  {dayjs(page.date).format("YYYY-MM-DD")}
                 </div>
               </div>
             ))}
