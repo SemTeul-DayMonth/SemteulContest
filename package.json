@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
     "apollo-cache-inmemory": "^1.6.6",
@@ -23,5 +24,15 @@
     "react-router-dom": "^6.4.3",
     "react-script": "^2.0.5",
     "web-vitals": "^3.0.4"
+=======
+  "devDependencies": {
+    "concurrently": "^7.5.0"
+  },
+  "scripts": {
+    "backend": "nodemon node-server/index",
+    "dev": "concurrently \"npm run backend\" \"npm run start --prefix react-project\"",
+    "install-client": "cd react-project && npm install",
+    "install-server": "cd node-server && npm install"
+>>>>>>> 952a1591557e541da5f0f4a2b27b18345889e58a
   }
 }

@@ -37,16 +37,25 @@
   font-size: 23px;
   margin-left: 40px;
   margin-right: 25px;
+  text-decoration: none;
+  color: black;
+  font-family: "Distant Galaxy", sans-serif;
+  -webkit-transform: scale(1, 1.2);
+}
+
+.mainLogo:hover {
+  cursor: pointer;
 }
 
 .searchBar {
-  width: 470px;
+  width: 500px;
   height: 35px;
   display: flex;
   flex-direction: row;
   align-items: center;
   box-shadow: 0px 0px 4px 2px rgb(233, 233, 233);
   background-color: white;
+  border-radius: 25px;
 }
 
 .search {
