@@ -29,17 +29,16 @@
   margin: 0 40px;
 }
 
-.cal .year,
-.cal .month {
-  margin: 0;
-  text-align: center;
-}
-
 .cal .year {
+  font-family: "Distant Galaxy", sans-serif;
   font-size: 20px;
   margin-bottom: 15px;
 }
-
+.cal .month {
+  margin: 0;
+  text-align: center;
+  font-family: "Distant Galaxy", sans-serif;
+}
 .cal .month {
   font-size: 30px;
 }
@@ -74,6 +73,7 @@
   height: calc(300px / 6);
   align-items: center;
   justify-content: center;
+  font-family: Arimo;
 }
 
 .weekDays .day {
@@ -82,11 +82,11 @@
   height: calc(200px / 6);
 }
 
-.weekDays .day:first-child {
+.weekDays .day:first-childs {
   color: rgba(228, 4, 4, 0.712);
 }
 
-.weekDays .day:last-child {
+.weekDays .day:last-childs {
   color: rgba(1, 1, 218, 0.651);
 }
 
@@ -98,6 +98,7 @@
   align-items: center;
   justify-content: center;
   font-weight: 600;
+  font-family: Arimo;
 }
 
 .cal_month .selectedAssignDay {
@@ -119,7 +120,7 @@
 .currentDay {
   border-radius: 20px;
   color: white;
-  background-color: #7c68eeb0;
+  background-color: #bfb1eb;
 }
 
 /* .cal_month {
@@ -193,10 +194,10 @@
     color: rgb(146, 146, 146);
   }
   
-  .cal_month .day:nth-child(7n) {
+  .cal_month .day:nth-childs(7n) {
     color: #486ed7;
   }
   
-  .cal_month .day:nth-child(7n+1) {
+  .cal_month .day:nth-childs(7n+1) {
     color: #db5178;
   } */

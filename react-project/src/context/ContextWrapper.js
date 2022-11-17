@@ -9,30 +9,30 @@ function initTodos() {
 }
 
 export default function ContextWrapper(props) {
+  const [pageMode, setPageMode] = useState("page");
   const [monthIndex, setMonthIndex] = useState(dayjs().month());
   const [weekIndex, setWeekIndex] = useState(0);
-  const [ShowModal, setShowModal] = useState("");
+  const [dayViewDate, setDayViewDate] = useState(dayjs());
+  const [modalObj, setModalObj] = useState({
+    date: dayjs(),
+    type: "",
+    parent: "",
+  });
   const [showSchedule, setShowSchedule] = useState("month");
-
-  useEffect(() => {
-    if (weekIndex > 4) {
-      setWeekIndex(0);
-      setMonthIndex((cur) => cur + 1);
-    } else if (weekIndex < 0) {
-      setWeekIndex(4);
-      setMonthIndex((cur) => cur - 1);
-    }
-  }, [weekIndex]);
 
   return (
     <GlobalContext.Provider
       value={{
+        pageMode,
+        setPageMode,
         monthIndex,
         setMonthIndex,
         weekIndex,
         setWeekIndex,
-        ShowModal,
-        setShowModal,
+        dayViewDate,
+        setDayViewDate,
+        modalObj,
+        setModalObj,
         showSchedule,
         setShowSchedule,
       }}

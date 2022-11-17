@@ -9,7 +9,7 @@ import { useForm } from "../utils/hooks";
 
 function Login() {
   const navigate = useNavigate();
-  const context = useContext(AuthContext);
+  const user = useContext(AuthContext);
   const [errors, setErrors] = useState({});
 
   const { onChange, onSubmit, values } = useForm(loginUser, {
@@ -19,8 +19,8 @@ function Login() {
 
   const [checkUser, { loading }] = useMutation(LOGIN_USER, {
     update(_, { data: { login: userData } }) {
-      context.login(userData);
-      navigate("/");
+      user.login(userData);
+      navigate("/", { replace: true });
     },
     onError(err) {
       setErrors(err.graphQLErrors[0].extensions.errors);

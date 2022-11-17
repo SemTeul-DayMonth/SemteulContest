@@ -1,47 +1,69 @@
 import React, { Fragment, useContext, useState, useEffect } from "react";
+import { useQuery } from "@apollo/client";
 import GlobalContext from "../context/GlobalContext";
 import "../static/Month.css";
 import dayjs from "dayjs";
+import { AuthContext } from "../context/auth";
 import { getMonth } from "../utils/daysMatrix";
 import Day from "./Day";
+import { FETCH_TODOS_QUERY } from "../utils/querys";
+import { getPageCounts } from "../utils/util";
+import { useNavigate, useParams } from "react-router-dom";
+import CalHeader from "./CalHeader";
 
-const weekDays = ["SON", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+const weekDays = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
 export default function Month() {
-  const {
-    monthIndex,
-    setMonthIndex,
-    showSchedule,
-    setShowSchedule,
-    setWeekIndex,
-  } = useContext(GlobalContext);
-  const [currentMonth, setCurrentMonth] = useState(getMonth());
+  const params = useParams();
+  let yearIndex = Number(params.year);
+  let monthIndex = Number(params.month);
+  const [currentMonth, setCurrentMonth] = useState(
+    getMonth(yearIndex, monthIndex - 1).slice(0, 6)
+  );
+
+  const { user } = useContext(AuthContext);
+  const { pageMode } = useContext(GlobalContext);
+  const userId = user?.id;
+  let currentDate = dayjs(new Date(yearIndex, monthIndex - 1));
+  const navigate = useNavigate();
 
   useEffect(() => {
-    setCurrentMonth(getMonth(monthIndex));
+    if (user && !userId) {
+      window.location.replace("/");
+    }
+  }, [user]);
+
+  const { error, data } = useQuery(FETCH_TODOS_QUERY, {
+    variables: { userId },
+  });
+
+  const pageCounts = getPageCounts(pageMode, data, currentDate);
+
+  useEffect(() => {
+    setCurrentMonth(getMonth(yearIndex, monthIndex - 1).slice(0, 6));
   }, [monthIndex]);
 
   function prev_mon() {
-    setMonthIndex(monthIndex - 1);
+    if (monthIndex > 1) {
+      monthIndex -= 1;
+    } else {
+      monthIndex = 12;
+      yearIndex -= 1;
+    }
   }
   function next_mon() {
-    setMonthIndex(monthIndex + 1);
+    if (monthIndex < 12) {
+      monthIndex += 1;
+    } else {
+      monthIndex = 1;
+      yearIndex += 1;
+    }
   }
 
   return (
     <Fragment>
-      <p className="year">
-        {dayjs(new Date(dayjs().year(), monthIndex)).format("YYYY")}
-      </p>
-      <div className="cal_month_header">
-        <div onClick={prev_mon}>&lt;</div>
-        <p className="month">
-          {dayjs(new Date(dayjs().year(), monthIndex))
-            .format("MMM")
-            .toUpperCase()}
-        </p>
-        <div onClick={next_mon}>&gt;</div>
-      </div>
+      <CalHeader mode="month" currentMonth={currentMonth} />
+
       <div className="cal_month">
         <div className="weekDays">
           {weekDays.map((day, i) => (
@@ -55,12 +77,16 @@ export default function Month() {
             className="week"
             key={i}
             onClick={() => {
-              setShowSchedule("week");
-              setWeekIndex(i);
+              navigate(`/week/${yearIndex}/${monthIndex}/${i}`);
             }}
           >
             {row.map((day, idx) => (
-              <Day month={monthIndex} day={day} key={idx} />
+              <Day
+                month={monthIndex}
+                day={day}
+                pageCount={pageCounts[day.format("D")]}
+                key={idx}
+              />
             ))}
           </div>
         ))}
