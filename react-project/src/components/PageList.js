@@ -56,9 +56,14 @@ export default function PageList({ pageDate }) {
   }
 
   function PrntPageCell({ page }) {
+    const nowPage = data.getPages.pages.find(({ id }) => id === page.parentId);
     return (
       <div className={"prntPageCell " + "pageCell"}>
-        <p onClick={() => setModalObj({ type: "pageView", page, refetch })}>
+        <p
+          onClick={() =>
+            setModalObj({ type: "pageView", page: nowPage, refetch })
+          }
+        >
           {page.parentTitle}
         </p>
         <button

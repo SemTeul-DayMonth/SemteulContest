@@ -60,8 +60,12 @@
   color: #7b68ee;
 }
 
+.prntPageCell + .pageCell {
+  transform: translateX(20px);
+}
+
 .prntPageCell {
-  transform: translateX(-20px);
+  transform: translateX(0px);
   background-color: #f7f5fd;
 }
 

@@ -8,6 +8,7 @@ import PageModal from "../components/PageModal";
 import Week from "../components/Week";
 import DayView from "../components/DayView";
 import PageView from "../components/PageView";
+import Repository from "../components/Repository";
 import { Route, Routes } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
@@ -34,10 +35,8 @@ function Main() {
                 path="/day/:year/:month/:week/:day"
                 element={<DayView />}
               />
+              <Route path="/repo" element={<Repository />} />
             </Routes>
-            {/* {showSchedule === "month" && <Month />}
-              {showSchedule === "week" && <Week />}
-              {showSchedule === "day" && <DayView />} */}
           </div>
         </div>
         <SideTodo />
