@@ -51,7 +51,6 @@ export default function CalHeader({ mode, prevWeekCount, currentMonth }) {
 
   return (
     <Fragment>
-      <p className="year">{currentDate.format("YYYY")}</p>
       <div className={"cal_" + mode + "_header"}>
         {/* prev */}
         <div
@@ -78,11 +77,15 @@ export default function CalHeader({ mode, prevWeekCount, currentMonth }) {
               navigate(`/month/${year}/${month}`);
             }}
           >
-            {currentDate.format("MM")}
+            {currentDate.format("YYYY ") +
+              currentDate.format("MMM").toUpperCase()}
           </p>
         )}
         {mode === "month" && (
-          <p className="month">{currentDate.format("MM")}</p>
+          <p className="month">
+            {currentDate.format("YYYY ") +
+              currentDate.format("MMM").toUpperCase()}
+          </p>
         )}
 
         {/* next */}
