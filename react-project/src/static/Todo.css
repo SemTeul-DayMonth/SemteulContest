@@ -10,7 +10,7 @@
   height: 580px;
   margin-top: 10px;
   box-shadow: 0px 0px 10px 2px rgb(237 237 237);
-  border-radius: 20px;
+  border-radius: 9px;
 }
 
 .todoTitle {
@@ -19,6 +19,7 @@
   margin-top: 20px;
   font-family: "Distant Galaxy", sans-serif;
   -webkit-transform: scale(1, 1.2);
+  color: #7b417b;
 }
 
 .addPageBtn {
@@ -87,7 +88,7 @@
   border-radius: 40px;
   box-shadow: 3px 3px 6px 1px rgb(208, 208, 208);
   position: absolute;
-  background-color: blueviolet;
+  background-color: #7b417b;
   color: white;
   font-size: 40px;
   cursor: pointer;

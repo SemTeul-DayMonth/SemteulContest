@@ -9,7 +9,7 @@ export default function SideTodo() {
 
   return (
     <div className="todayTodo">
-      <div className="todoTitle">Today's To-Do List</div>
+      <div className="todoTitle">To-Do List</div>
       <PageList pageDate={dayjs().format("YYYY-MM-DD")} />
       <div onClick={() => setModalObj({ type: "page" })} className="addEvtBtn">
         +
