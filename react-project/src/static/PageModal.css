@@ -43,6 +43,11 @@
   font-family: 'Arimo';
 }
 
+.bgModal main .title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .bgModal main .titleInput {
   width: 350px;
   border: 0;
@@ -129,7 +134,7 @@
   height: 25px;
   margin-left: 30px;
   width: 300px;
-  background-color: #e0c0e0;
+  background-color: hsl(300, 35%, 92%);
   border-radius: 10px;
 }
 
@@ -178,8 +183,10 @@
   align-items: center;
   height: 25px;
   margin-left: 30px;
+  margin-top: -6px;
+  margin-bottom: 6px;
   width: 300px;
-  background-color: #e0c0e0;
+  background-color: hsl(300, 35%, 92%);
   border-radius: 10px;
 }
 

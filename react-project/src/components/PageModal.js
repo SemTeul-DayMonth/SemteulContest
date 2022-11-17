@@ -110,7 +110,7 @@ export default function PageModal() {
           ></button>
         </header>
         <main>
-          {values.pageType === "todo" && <input type="checkbox" />}
+          
             <div className="prntCell">
               <img src={folderIcon}/>
               {prntList.map((page, i) => (
@@ -157,6 +157,8 @@ export default function PageModal() {
             </div>
           ))}
           </div>}
+          <div className="title">
+          {values.pageType === "todo" && <input type="checkbox" />}
           <input
             type="text"
             name="title"
@@ -166,6 +168,8 @@ export default function PageModal() {
             className="titleInput"
             required
           />
+          </div>
+          
           <div className="childCell">
             ㄴ
               {childList.map((page, i) => (
@@ -197,7 +201,7 @@ export default function PageModal() {
             />
             </div>
 
-            {prntPageList.length !== 0 && <div className="childPageList">
+            {childPageList.length !== 0 && <div className="childPageList">
             {childPageList.map((page, i) => (
               <div className="childList" key={i}>
                 <p>{page.title}</p>
