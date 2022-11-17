@@ -1,26 +1,34 @@
 /* to-do */
 .todayTodo {
+  background-color: #ffffff;
   grid-area: todayToDo;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  align-items: center;
   position: relative;
-  height: 550px;
+  height: 580px;
+  margin-top: 10px;
+  box-shadow: 0px 0px 10px 2px rgb(237 237 237);
+  border-radius: 20px;
 }
 
 .todoTitle {
-  font-size: 30px;
-  margin-left: 8px;
+  font-size: 25px;
   margin-bottom: 20px;
+  margin-top: 20px;
+  font-family: "Distant Galaxy", sans-serif;
 }
 
-.addTodoBtn {
+.addPageBtn {
   width: 200px;
 }
 
-.pageCellList {
+.pageList {
+  width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   overflow: hidden;
 }
 
@@ -32,9 +40,9 @@
   align-items: center;
   justify-content: space-between;
   border-radius: 20px;
-  background-color: #fff;
+  background-color: #e4dbff;
   margin-bottom: 10px;
-  box-shadow: #efefef 2px 2px 4px 1px;
+  box-shadow: #d9d9d9 2px 2px 4px 1px;
 }
 
 .pageCell p {
@@ -44,7 +52,7 @@
 
 .pageCell button {
   margin-right: 10px;
-  background-color: #fff;
+  background-color: #e4dbff;
   border: 0;
   outline: 0;
   cursor: pointer;
@@ -53,10 +61,18 @@
 }
 
 .prntPageCell {
-  height: 20px;
-  width: 150px;
-  transform: translateX(-17px);
-  background-color: rgb(193, 193, 193);
+  transform: translateX(-20px);
+  background-color: #f7f5fd;
+}
+
+.prntPageCell button {
+  margin-right: 10px;
+  background-color: #f7f5fd;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  font-size: 20px;
+  color: #7b68ee;
 }
 
 .addEvtBtn {

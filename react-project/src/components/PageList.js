@@ -128,27 +128,15 @@ export default function PageList({ pageDate }) {
         ) : (
           <p>Please Login</p>
         )
-      ) : pageList.length !== 0 ? (
+      ) : (
+        pageList.length !== 0 &&
         pageList.map((page, i) => (
           <div className="familyPage" key={i}>
             {page.parent[0] && <PrntPageCell page={page.parent[0]} />}
             <PageCell page={page} />
           </div>
         ))
-      ) : (
-        <p>할 일을 추가하세요</p>
       )}
-      <button
-        className="addTodoBtn"
-        onClick={() =>
-          setModalObj({
-            date: pageDate,
-            type: "page",
-          })
-        }
-      >
-        +
-      </button>
     </div>
   );
 }
