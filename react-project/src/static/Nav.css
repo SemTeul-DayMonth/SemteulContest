@@ -21,7 +21,7 @@
 }
 
 .modeSwitch {
-  margin-right: 30px;
+  margin-right: 10px;
   font-size: 22px;
   color: #7b417b;
   font-family: "Distant Galaxy", sans-serif;
@@ -50,7 +50,7 @@
 }
 
 .searchBar {
-  width: 500px;
+  width: 648px;
   height: 35px;
   display: flex;
   flex-direction: row;
@@ -58,6 +58,9 @@
   box-shadow: 0px 0px 4px 2px rgb(233, 233, 233);
   background-color: white;
   border-radius: 25px;
+}
+.searchImg {
+  width: 45px;
 }
 
 .search {
