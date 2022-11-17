@@ -38,10 +38,16 @@
   margin: 0;
   text-align: center;
   font-family: "Distant Galaxy", sans-serif;
+  color: #ffffff;
 }
 .cal .month {
   font-size: 30px;
   -webkit-transform: scale(1, 1.1);
+  background-color: #7b417b;
+  width: 4rem;
+  border-radius: 1em;
+  
+
 }
 
 .cal_month {

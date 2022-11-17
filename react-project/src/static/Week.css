@@ -71,3 +71,9 @@
 .cal_week_schedule div .pageList .pageCell {
   width: 90px;
 }
+.day_view {
+  font-family: "Distant Galaxy", sans-serif, normal;
+  font-size: 25px;
+  -webkit-transform: scale(1, 1.2);
+  letter-spacing : 1px;
+}

@@ -23,15 +23,17 @@
 .modeSwitch {
   margin-right: 30px;
   font-size: 22px;
+  color: #7b417b;
+  font-family: "Distant Galaxy", sans-serif;
 }
 
 .settingsLink,
 .nav_right a {
   margin-right: 30px;
   font-size: 22px;
-  color: black;
   text-decoration: none;
-}
+  color: #7b417b;
+  font-family: "Distant Galaxy", sans-serif;}
 
 .mainLogo {
   font-size: 23px;

@@ -47,9 +47,6 @@ export default function Nav() {
         >
           {pageMode}
         </div>
-        <a href="" className="settingsLink">
-          settings
-        </a>
       </div>
     </div>
   );

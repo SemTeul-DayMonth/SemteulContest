@@ -16,7 +16,7 @@ function DayView() {
   return (
     <Fragment>
       <div className="cal_day_header">
-        <h2>{dayViewDate.format("YYYY MMM DD")}</h2>
+        <h2 className="day_view">{dayViewDate.format("YYYY MMM DD")}</h2>
         <button
           onClick={() =>
             setModalObj({
