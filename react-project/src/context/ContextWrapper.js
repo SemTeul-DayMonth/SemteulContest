@@ -9,6 +9,7 @@ function initTodos() {
 }
 
 export default function ContextWrapper(props) {
+  const [pageMode, setPageMode] = useState("page");
   const [monthIndex, setMonthIndex] = useState(dayjs().month());
   const [weekIndex, setWeekIndex] = useState(0);
   const [dayViewDate, setDayViewDate] = useState(dayjs());
@@ -22,6 +23,8 @@ export default function ContextWrapper(props) {
   return (
     <GlobalContext.Provider
       value={{
+        pageMode,
+        setPageMode,
         monthIndex,
         setMonthIndex,
         weekIndex,

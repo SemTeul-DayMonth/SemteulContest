@@ -5,7 +5,6 @@
   align-items: center;
   flex-direction: column;
   margin: 0;
-  font-family: "NotoSansR";
 }
 
 .cal_month_header {
@@ -29,10 +28,11 @@
   margin: 0 40px;
 }
 
-.cal .year{
+.cal .year {
   font-family: "Distant Galaxy", sans-serif;
   font-size: 20px;
   margin-bottom: 15px;
+  -webkit-transform: scale(1, 1.2);
 }
 .cal .month {
   margin: 0;
@@ -41,6 +41,7 @@
 }
 .cal .month {
   font-size: 30px;
+  -webkit-transform: scale(1, 1.1);
 }
 
 .cal_month {
@@ -73,6 +74,7 @@
   height: calc(300px / 6);
   align-items: center;
   justify-content: center;
+  font-family: "Arimo";
 }
 
 .weekDays .day {
@@ -97,6 +99,7 @@
   align-items: center;
   justify-content: center;
   font-weight: 600;
+  font-family: "Arimo";
 }
 
 .cal_month .selectedAssignDay {

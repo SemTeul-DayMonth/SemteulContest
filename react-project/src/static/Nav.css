@@ -38,9 +38,9 @@
   margin-left: 40px;
   margin-right: 25px;
   text-decoration: none;
-  color: black;
+  color: #7b417b;
   font-family: "Distant Galaxy", sans-serif;
-  -webkit-transform:scale(1,1.2);
+  -webkit-transform: scale(1, 1.2);
 }
 
 .mainLogo:hover {
@@ -60,13 +60,19 @@
 
 .search {
   border: 0;
-  width: 320px;
+  flex: auto;
+  margin-right: 5%;
   margin-left: 10px;
+  align-items: center;
 }
 
 .search::placeholder {
-  color: #7b68ee;
+  color: #7b417b;
   font-size: 15px;
+  align-items: center;
+  text-align: center;
+  opacity: 0.35;
+
 }
 
 .search:focus {

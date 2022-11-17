@@ -1,39 +1,66 @@
-.pageModal {
+.bgModal {
   position: fixed;
-  background-color: rgb(255, 255, 255);
-  width: 500px;
-  height: 300px;
-}
-
-.pageModal header {
-  display: flex;
-  flex-direction: row;
-  margin-left: 20px;
-}
-
-.pageModal header > div {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50px;
-  margin-top: 6px;
-  padding-bottom: 6px;
-  background-color: rgb(255, 255, 255);
+  height: 100%;
+  width: 100%;
+  background-color: rgba(128, 128, 128, 0.347);
+  z-index: 5;
 }
 
-.pageModal header > div:hover {
+.pageDateModal {
+  position: fixed;
+  background-color: rgb(255, 255, 255);
+  width: 400px;
+  height: 400px;
+}
+
+.bgModal header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bgModal header .grippy {
+  font-family: sans-serif;
+  letter-spacing: 2px;
+  cursor: move;
+  width: 10px;
+  height: 20px;
+  line-height: 5px;
+  font-size: 12px;
+  padding: 3px 4px;
+  margin-top: -0.7em;
+  margin-right: 0.3em;
+  color: #cccccc;
+  text-shadow: 1px 0 1px black;
+}
+
+.bgModal header .grippy::after {
+  content: ".. .. .. ..";
+}
+
+.bgModal header .close {
+  border: 0;
+  outline: 0;
+  background-color: white;
   cursor: pointer;
 }
 
-.pageModal main {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-  background-color: rgb(255, 255, 255);
+.bgModal header .close::after {
+  content: "\00d7";
+  font-size: 30px;
 }
 
-.pageModal main input {
-  margin: 10px;
-  width: 100px;
+.bgModal main .titleInput {
+  width: 200px;
+  margin-left: 20px;
+  border: 0;
+  border-bottom: 2px solid #7c68ee5d;
+  outline: 0;
+}
+
+.bgModal main .titleInput:focus {
+  border-bottom: 2px solid #826ff1fb;
 }

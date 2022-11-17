@@ -11,7 +11,7 @@ import { getPageCounts } from "../utils/util";
 import { useNavigate, useParams } from "react-router-dom";
 import CalHeader from "./CalHeader";
 
-const weekDays = ["SON", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+const weekDays = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
 export default function Month() {
   const params = useParams();
@@ -22,6 +22,7 @@ export default function Month() {
   );
 
   const { user } = useContext(AuthContext);
+  const { pageMode } = useContext(GlobalContext);
   const userId = user?.id;
   let currentDate = dayjs(new Date(yearIndex, monthIndex - 1));
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ export default function Month() {
     variables: { userId },
   });
 
-  const pageCounts = getPageCounts(data, currentDate);
+  const pageCounts = getPageCounts(pageMode, data, currentDate);
 
   useEffect(() => {
     setCurrentMonth(getMonth(monthIndex - 1).slice(0, 6));
