@@ -21,18 +21,12 @@ module.exports = gql`
     title: String!
     date: String!
     isDone: Boolean!
-    parent: [Parents]!
-    child: [Childs]!
+    parent: [Parent]!
+    childs: [Child]!
     text: String!
+    pageType: String!
     createdAt: String!
   }
-
-  # type Todos {
-  #   id: ID!
-  #   userId: ID!
-  #   username: String!
-  #   todos: [Todo]!
-  # }
 
   input RegisterInput {
     username: String!
@@ -47,24 +41,33 @@ module.exports = gql`
     title: String!
     date: String!
     text: String
-    parentIds: [ParentIds]
-    childIds: [ChildIds]
+    parentInput: [ParentInput]
+    childInput: [ChildInput]
+    pageType: String!
   }
 
-  type Parents {
+  type Parent {
     parentId: ID!
+    parentDate: String!
+    parentTitle: String!
   }
 
-  input ParentIds {
+  input ParentInput {
     parentId: ID!
+    parentDate: String!
+    parentTitle: String!
   }
 
-  type Childs {
+  type Child {
     childId: ID!
+    childDate: String!
+    childTitle: String!
   }
 
-  input ChildIds {
+  input ChildInput {
     childId: ID!
+    childDate: String!
+    childTitle: String!
   }
 
   type Query {

@@ -1,30 +1,41 @@
 /* to-do */
 .todayTodo {
+  background-color: #ffffff;
   grid-area: todayToDo;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  align-items: center;
   position: relative;
-  height: 550px;
+  height: 580px;
+  margin-top: 10px;
+  box-shadow: 0px 0px 10px 2px rgb(237 237 237);
+  border-radius: 9px;
 }
 
 .todoTitle {
-  font-size: 30px;
-  margin-left: 8px;
+  font-size: 25px;
   margin-bottom: 20px;
+  margin-top: 20px;
+  font-family: "Distant Galaxy", sans-serif;
+  -webkit-transform: scale(1, 1.2);
+  color: #7b417b;
 }
 
-.nullTodoList p {
-  font-size: 20px;
+.addPageBtn {
+  width: 200px;
 }
 
-.todoList {
+.pageList {
+  width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   overflow: hidden;
+  opacity: 0.5;
 }
 
-.todo {
+.pageCell {
   height: 30px;
   width: 200px;
   display: flex;
@@ -32,20 +43,34 @@
   align-items: center;
   justify-content: space-between;
   border-radius: 20px;
-  background-color: #fff;
+  background-color: #e4dbff;
   margin-bottom: 10px;
-  box-shadow: #efefef 2px 2px 4px 1px;
+  box-shadow: #d9d9d9 2px 2px 4px 1px;
 }
 
-.todo p,
-.nullTodoList p {
+.pageCell p {
   margin: 0;
   margin-left: 20px;
 }
 
-.todo button {
+.pageCell button {
   margin-right: 10px;
-  background-color: #fff;
+  background-color: #e4dbff;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  font-size: 20px;
+  color: #7b68ee;
+}
+
+.prntPageCell {
+  transform: translateX(-20px);
+  background-color: #f7f5fd;
+}
+
+.prntPageCell button {
+  margin-right: 10px;
+  background-color: #f7f5fd;
   border: 0;
   outline: 0;
   cursor: pointer;
@@ -64,7 +89,7 @@
   border-radius: 40px;
   box-shadow: 3px 3px 6px 1px rgb(208, 208, 208);
   position: absolute;
-  background-color: blueviolet;
+  background-color: #7b417b;
   color: white;
   font-size: 40px;
   cursor: pointer;

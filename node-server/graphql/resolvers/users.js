@@ -89,6 +89,7 @@ module.exports = {
         username,
         userId: resUser._id,
         pages: [],
+        pageType: "page",
       });
 
       await newPage.save();

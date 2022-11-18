@@ -11,23 +11,28 @@ const pageSchema = new Schema({
       title: String,
       date: String,
       isDone: Boolean,
+      text: String,
       parent: [
         {
           parentId: {
             type: Schema.Types.ObjectId,
             ref: "pages",
           },
+          parentDate: String,
+          parentTitle: String,
         },
       ],
-      child: [
+      childs: [
         {
           childId: {
             type: Schema.Types.ObjectId,
             ref: "pages",
           },
+          childDate: String,
+          childTitle: String,
         },
       ],
-      text: String,
+      pageType: String,
       createdAt: String,
     },
   ],

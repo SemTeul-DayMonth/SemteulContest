@@ -21,43 +21,63 @@
 }
 
 .modeSwitch {
-  margin-right: 30px;
+  margin-right: 10px;
   font-size: 22px;
+  color: #7b417b;
+  font-family: "Distant Galaxy", sans-serif;
 }
 
 .settingsLink,
 .nav_right a {
   margin-right: 30px;
   font-size: 22px;
-  color: black;
   text-decoration: none;
+  color: #7b417b;
+  font-family: "Distant Galaxy", sans-serif;
 }
 
 .mainLogo {
   font-size: 23px;
   margin-left: 40px;
   margin-right: 25px;
+  text-decoration: none;
+  color: #7b417b;
+  font-family: "Distant Galaxy", sans-serif;
+  -webkit-transform: scale(1, 1.2);
+}
+
+.mainLogo:hover {
+  cursor: pointer;
 }
 
 .searchBar {
-  width: 470px;
+  width: 648px;
   height: 35px;
   display: flex;
   flex-direction: row;
   align-items: center;
   box-shadow: 0px 0px 4px 2px rgb(233, 233, 233);
   background-color: white;
+  border-radius: 25px;
+}
+.searchImg {
+  width: 45px;
 }
 
 .search {
   border: 0;
-  width: 320px;
+  flex: auto;
+  margin-right: 5%;
   margin-left: 10px;
+  align-items: center;
 }
 
 .search::placeholder {
-  color: #7b68ee;
+  color: #7b417b;
   font-size: 15px;
+  align-items: center;
+  text-align: center;
+  opacity: 0.35;
 }
 
 .search:focus {

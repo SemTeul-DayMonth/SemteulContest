@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "concurrently": "^7.5.0"
+  },
+  "scripts": {
+    "backend": "nodemon node-server/index",
+    "dev": "concurrently \"npm run backend\" \"npm run start --prefix react-project\"",
+    "install-client": "cd react-project && npm install",
+    "install-server": "cd node-server && npm install"
+  }
+}
