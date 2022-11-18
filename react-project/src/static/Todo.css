@@ -32,6 +32,7 @@
   flex-direction: column;
   align-items: center;
   overflow: hidden;
+  opacity: 0.5;
 }
 
 .pageCell {
@@ -62,12 +63,8 @@
   color: #7b68ee;
 }
 
-.prntPageCell + .pageCell {
-  transform: translateX(20px);
-}
-
 .prntPageCell {
-  transform: translateX(0px);
+  transform: translateX(-20px);
   background-color: #f7f5fd;
 }
 

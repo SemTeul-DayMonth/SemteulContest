@@ -5,7 +5,6 @@
   align-items: center;
   flex-direction: column;
   margin: 0;
-  font-family: "IBM Plex Sans KR", sans-serif;
 }
 
 .cal_month_header {
@@ -17,7 +16,6 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
-  font-family: "IBM Plex Sans KR", sans-serif;
 }
 
 .cal_month_header div:hover {
@@ -34,14 +32,20 @@
   font-family: "Distant Galaxy", sans-serif;
   font-size: 20px;
   margin-bottom: 15px;
+  -webkit-transform: scale(1, 1.2);
 }
 .cal .month {
+  display: flex;
   margin: 0;
-  text-align: center;
+  justify-content: center;
   font-family: "Distant Galaxy", sans-serif;
-}
-.cal .month {
+  color: #ffffff;
   font-size: 30px;
+  background-color: #7b417b;
+  width: 12rem;
+  height: 2.5rem;
+  align-items: center;
+  border-radius: 1em;
 }
 
 .cal_month {
@@ -74,7 +78,7 @@
   height: calc(300px / 6);
   align-items: center;
   justify-content: center;
-  font-family: Arimo;
+  font-family: "Arimo";
 }
 
 .weekDays .day {
@@ -99,7 +103,7 @@
   align-items: center;
   justify-content: center;
   font-weight: 600;
-  font-family: Arimo;
+  font-family: "Arimo";
 }
 
 .cal_month .selectedAssignDay {
@@ -123,82 +127,3 @@
   color: white;
   background-color: #bfb1eb;
 }
-
-/* .cal_month {
-    height: 330px;
-    width: 800px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow: hidden;
-  }
-  
-  .cal_month .dayOfWeek {
-    width: 770px;
-    display: flex;
-  }
-  
-  .cal_month .week {
-    width: 770px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    border-radius: 3px;
-    margin: 10px 0;
-  }
-  
-  .cal_month .week:hover {
-    background-color: rgb(242, 242, 242);
-  }
-  
-  @keyframes expandWeek {
-    0% {}
-    100% {}
-  }
-  
-  @keyframes moveWeek {
-    0% {transform: translateY(0px)}
-    100% {transform: translateY(250px);}
-  }
-  
-  .cal_month .weekSchedule {
-  }
-  
-  .cal_month .schedule {
-    height: 100%;
-  }
-  
-  .cal_month .expandWeek {
-  }
-  
-  .cal_month .moveWeek {
-    animation: moveWeek 1s cubic-bezier(0.075, 0.82, 0.165, 1) 0s forwards;
-  }
-  
-  .cal_month .day {
-    z-index: 2;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    width: calc(100% / 7);
-    height: calc(350px / 7);
-    font-size: 13px;
-    border-radius:5px;
-  }
-  
-  .cal_month .day a:hover {
-    cursor: pointer;
-  }
-  
-  .cal_month .otherMon {
-    color: rgb(146, 146, 146);
-  }
-  
-  .cal_month .day:nth-childs(7n) {
-    color: #486ed7;
-  }
-  
-  .cal_month .day:nth-childs(7n+1) {
-    color: #db5178;
-  } */

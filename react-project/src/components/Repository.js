@@ -38,16 +38,21 @@ export default function Repository() {
   return (
     <div className="repo">
       <nav>
-        <button onClick={() => navigate("/month/" + dayjs().format("YYYY/MM"))}>
-          X
-        </button>
-        <button onClick={() => navigate(-1)}>back</button>
+        <div className="navBox">
+          <button
+            onClick={() => navigate("/month/" + dayjs().format("YYYY/MM"))}
+          >
+            X
+          </button>
+          <button onClick={() => navigate(-1)}>&#60;</button>
+        </div>
       </nav>
       <main>
         {indexs[0]
           ? pageList.map((page, i) => (
               <div className="repoCell" key={i}>
                 <div
+                  className="childPageListButton"
                   onClick={() => {
                     navigate(location.pathname + "/" + String(i), {
                       state: page.childs,
@@ -58,17 +63,22 @@ export default function Repository() {
                   {page.title}
                 </div>
                 <div
+                  className="pageViewButton"
                   onClick={() =>
                     setModalObj({ type: "pageView", page, refetch })
                   }
                 >
-                  +
+                  &#07;
+                </div>
+                <div className="pageListDate">
+                  {dayjs(page.date).format("YYYY-MM-DD")}
                 </div>
               </div>
             ))
           : defaultPageList.map((page, i) => (
               <div className="repoCell" key={i}>
                 <div
+                  className="childPageListButton"
                   onClick={() => {
                     navigate(String(i), { state: page.childs });
                   }}
@@ -77,11 +87,15 @@ export default function Repository() {
                   {page.title}
                 </div>
                 <div
+                  className="pageViewButton"
                   onClick={() =>
                     setModalObj({ type: "pageView", page, refetch })
                   }
                 >
-                  +
+                  &#07;
+                </div>
+                <div className="pageListDate">
+                  {dayjs(page.date).format("YYYY-MM-DD")}
                 </div>
               </div>
             ))}

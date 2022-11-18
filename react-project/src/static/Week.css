@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin: 15px 0 5px 0;
+  margin: 15px 0 15px 0;
 }
 
 .cal_week_header div:hover {
@@ -17,8 +17,7 @@
 }
 
 .cal_week_header .month {
-  border-radius: 10px;
-  padding: 5px 10px;
+  margin: 0 20px;
 }
 
 .cal_week_header .month:hover {
@@ -70,4 +69,10 @@
 
 .cal_week_schedule div .pageList .pageCell {
   width: 90px;
+}
+.day_view {
+  font-family: "Distant Galaxy", sans-serif, normal;
+  font-size: 25px;
+  -webkit-transform: scale(1, 1.2);
+  letter-spacing: 1px;
 }

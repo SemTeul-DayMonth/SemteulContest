@@ -4,6 +4,7 @@ import { AuthContext } from "../context/auth";
 import { useNavigate } from "react-router-dom";
 import GlobalContext from "../context/GlobalContext";
 import dayjs from "dayjs";
+import magn from "../static/magn.png";
 
 export default function Nav() {
   const user = useContext(AuthContext);
@@ -27,8 +28,9 @@ export default function Nav() {
             className="search"
             type="text"
             placeholder="Search for events"
-            style={{ color: "#7B68EE" }}
+            style={{ color: "#7b417b" }}
           />
+          <img className="searchImg" src={magn}></img>
         </div>
       </div>
       <div className="nav_right">
@@ -47,9 +49,6 @@ export default function Nav() {
         >
           {pageMode}
         </div>
-        <a href="" className="settingsLink">
-          settings
-        </a>
       </div>
     </div>
   );

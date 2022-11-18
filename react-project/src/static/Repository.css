@@ -7,30 +7,67 @@
 
 .repo nav {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: left;
+  background-color: hwb(273 54% 21%);
   height: 100%;
-  width: 80px;
-  border-right: 1px solid black;
+  width: 150px;
+  opacity: 1;
+
   align-items: center;
 }
-.repo nav button {
-  width: 40px;
-  height: 40px;
-  border-radius: 20px;
+
+.repo nav .navBox {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 97%;
+}
+
+.repo nav .navBox button {
+  width: 60px;
+  height: 60px;
+  background-color: white;
+  border-radius: 30px;
   border: 0;
   margin: 10px;
+  font-size: 27px;
+  font-weight: 700;
+  color: #7b417b;
 }
 
 .repo main {
-  height: 100%;
-  width: 100%;
+  height: 96%;
+  width: 80%;
+  padding: 10px 27px;
 }
 
 .repo .repoCell {
+  width: 600px;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 .repo .repoCell div {
   cursor: pointer;
+}
+
+.repoCell .childPageListButton {
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-size: 18px;
+  width: 150px;
+}
+
+.repoCell .pageViewButton {
+  width: 200px;
+  color: #7b417b;
+}
+
+.repoCell .pageListDate {
+  width: 100px;
+  color: #ababab;
 }

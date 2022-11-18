@@ -13,32 +13,13 @@
   position: fixed;
   background-color: rgb(255, 255, 255);
   width: 400px;
-  height: 400px;
+  height: 500px;
 }
 
 .bgModal header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-}
-
-.bgModal header .grippy {
-  font-family: sans-serif;
-  letter-spacing: 2px;
-  cursor: move;
-  width: 10px;
-  height: 20px;
-  line-height: 5px;
-  font-size: 12px;
-  padding: 3px 4px;
-  margin-top: -0.7em;
-  margin-right: 0.3em;
-  color: #cccccc;
-  text-shadow: 1px 0 1px black;
-}
-
-.bgModal header .grippy::after {
-  content: ".. .. .. ..";
 }
 
 .bgModal header .close {
@@ -50,17 +31,232 @@
 
 .bgModal header .close::after {
   content: "\00d7";
+  color: #7b417b;
   font-size: 30px;
 }
 
-.bgModal main .titleInput {
-  width: 200px;
+.bgModal main {
+  display: flex;
+  flex-direction: column;
   margin-left: 20px;
-  border: 0;
-  border-bottom: 2px solid #7c68ee5d;
-  outline: 0;
+  margin-right: 20px;
+  font-family: "Arimo";
 }
 
-.bgModal main .titleInput:focus {
-  border-bottom: 2px solid #826ff1fb;
+.bgModal main .title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.bgModal main .titleInput {
+  width: 350px;
+  border: 0;
+  outline: 0;
+  font-size: 30px;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-weight: 1000;
+  color: #7b417b;
+}
+
+.bgModal main .titleInput::placeholder {
+  color: #7b417b;
+}
+
+.bgModal main .when {
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 2px solid #efebfb;
+  border-bottom: 2px solid #efebfb;
+}
+
+.bgModal main input {
+  border: none;
+}
+
+.bgModal main input:focus {
+  outline: none;
+}
+
+.bgModal p {
+  margin: 0;
+}
+
+.bgModal img {
+  margin-top: 2px;
+  width: 18px;
+  height: 15px;
+}
+
+.bgModal main .prntCell {
+  display: flex;
+  flex-direction: row;
+  height: 20px;
+  margin-left: 15px;
+  width: 80%;
+  font-size: 12px;
+}
+
+.bgModal main .prntList {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  background-color: #7b417b;
+  border-radius: 5px;
+  color: #efebfb;
+  font-size: 12px;
+  font-family: "Arimo";
+  margin-left: 5px;
+  padding: 1px 2px;
+  height: 18px;
+}
+
+.bgModal main .prntSearch {
+  width: 60px;
+  background-color: #cfa7cf;
+  border-radius: 5px;
+  color: #efebfb;
+  font-size: 12px;
+  margin-left: 5px;
+  font-family: "Arimo";
+}
+
+.bgModal main .prntSearch::placeholder {
+  color: #efebfb;
+}
+
+.bgModal main .prntPageList {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 25px;
+  margin-left: 30px;
+  width: 300px;
+  background-color: hsl(300, 35%, 92%);
+  border-radius: 10px;
+}
+
+.bgModal main .childCell {
+  display: flex;
+  flex-direction: row;
+  height: 20px;
+  margin-left: 15px;
+  margin-top: -3px;
+  margin-bottom: 8px;
+  width: 80%;
+  font-size: 12px;
+}
+
+.bgModal main .childList {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  background-color: #efebfb;
+  border-radius: 5px;
+  color: #7b417b;
+  font-size: 12px;
+  font-family: "Arimo";
+  margin-left: 5px;
+  padding: 1px 2px;
+  height: 18px;
+}
+
+.bgModal main .childSearch {
+  width: 60px;
+  background-color: #cfa7cf;
+  border-radius: 5px;
+  color: #efebfb;
+  font-size: 12px;
+  margin-left: 5px;
+  font-family: "Arimo";
+}
+
+.bgModal main .childSearch::placeholder {
+  color: #7b417b;
+}
+
+.bgModal main .childPageList {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 25px;
+  margin-left: 30px;
+  margin-top: -6px;
+  margin-bottom: 6px;
+  width: 300px;
+  background-color: hsl(300, 35%, 92%);
+  border-radius: 10px;
+}
+
+.bgModal .dateInput:enabled {
+  color: #7b417b;
+  font-family: "Arimo";
+  font-size: 13px;
+}
+
+.bgModal .checkTime {
+  color: #7b417b;
+  font-family: "Arimo";
+  font-size: 13px;
+}
+
+.bgModal .listTime {
+  color: #7b417b;
+  font-family: "Arimo";
+  font-size: 13px;
+}
+
+.bgModal textarea {
+  border: none;
+}
+
+.bgModal textarea:enabled {
+  outline: none;
+  border: none;
+}
+
+.bgModal main .textInput {
+  vertical-align: top;
+  margin-top: 5px;
+  font-family: "Arimo";
+  font-size: 15px;
+  height: 280px;
+}
+
+.bgModal main .textInput::placeholder {
+  vertical-align: top;
+  color: #7b417b;
+}
+
+.bgModal footer {
+  width: 380px;
+  position: absolute;
+  bottom: 0;
+  background-color: #efebfb;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-size: 18px;
+  color: #7b417b;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 10px;
+}
+
+.bgModal footer .PageTodoType {
+  width: 35%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bgModal footer #save {
+  width: 90px;
+  border: none;
+  border-radius: 15px;
+  background-color: #7b417b;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-size: 18px;
+  color: #efebfb;
 }
