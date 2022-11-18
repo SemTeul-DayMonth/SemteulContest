@@ -15,7 +15,7 @@ export default function SideTodo() {
         Today's {pageMode === "page" ? "Page" : "Todo"} List
       </div>
       <PageList pageDate={dayjs().format("YYYY-MM-DD")} />
-      <button onClick={() => navigate("/repo")}>Repository</button>
+      <button onClick={() => navigate("/repo/")}>Repository</button>
       <div onClick={() => setModalObj({ type: "page" })} className="addEvtBtn">
         +
       </div>

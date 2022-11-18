@@ -1,3 +1,4 @@
+import folderIcon from "../static/folder.jpeg";
 import "../static/PageModal.css";
 import GlobalContext from "../context/GlobalContext";
 import { useQuery } from "@apollo/client";
@@ -103,87 +104,123 @@ export default function PageModal() {
         onSubmit={onSubmit}
       >
         <header>
-          <span className="grippy"></span>
           <button
             className="close"
             onClick={() => setModalObj({ type: "" })}
           ></button>
         </header>
         <main>
-          {values.pageType === "todo" && <input type="checkbox" />}
-          <input
-            type="text"
-            name="title"
-            value={values.title}
-            onChange={onChange}
-            placeholder="Add Page Title"
-            className="titleInput"
-            required
-          />
-          <input
-            type="date"
-            name="date"
-            value={pageDate}
-            onChange={(e) => setPageDate(e.target.value)}
-          />
-          <label>
-            <input
-              type="checkbox"
-              checked={isCheckedTime}
-              onChange={(e) => setIsCheckedTime(e.target.checked)}
-            />
-            time
-          </label>
+          <div className="prntCell">
+            <img src={folderIcon} />
+            {prntList.map((page, i) => (
+              <div className="prntList" key={i}>
+                <p>{page.parentTitle}</p>
+                <input
+                  type="checkbox"
+                  checked={prntList.some(
+                    ({ parentId }) => parentId === page.parentId
+                  )}
+                  onChange={(e) => {
+                    addPrnt(
+                      e.target.checked,
+                      page.parentTitle,
+                      page.parentDate,
+                      page.parentId
+                    );
+                  }}
+                />
+              </div>
+            ))}
 
-          {isCheckedTime && (
             <input
-              type="time"
+              className="prntSearch"
+              type="search"
               name=""
-              value={pageTime}
-              onChange={(e) => setPageTime(e.target.value)}
-              id=""
+              value={prntTitle}
+              onChange={(e) => setPrntTitle(e.target.value)}
+              placeholder="  Add +"
             />
-          )}
-
-          {(prntList.length !== 0 || childList.length !== 0) && (
-            <div className="relevantPages">
-              {prntList.length !== 0 && <p>Parent Pages</p>}
-              {prntList.map((page, i) => (
-                <div className="pageCell" key={i}>
-                  <p>{page.parentTitle}</p>
-                  <p>{dayjs(page.parentDate).format("YYYY-MM-DD")}</p>
+          </div>
+          {prntPageList.length !== 0 && (
+            <div className="prntPageList">
+              {prntPageList.map((page, i) => (
+                <div className="prntList" key={i}>
+                  <p>{page.title}</p>
                   <input
                     type="checkbox"
                     checked={prntList.some(
-                      ({ parentId }) => parentId === page.parentId
+                      ({ parentId }) => parentId === page.id
                     )}
+                    name={page.id}
                     onChange={(e) => {
-                      addPrnt(
-                        e.target.checked,
-                        page.parentTitle,
-                        page.parentDate,
-                        page.parentId
-                      );
+                      addPrnt(e.target.checked, page.title, page.date, page.id);
                     }}
                   />
                 </div>
               ))}
-              {childList.length !== 0 && <p>Child Pages</p>}
-              {childList.map((page, i) => (
-                <div className="pageCell" key={i}>
-                  <p>{page.childTitle}</p>
-                  <p>{dayjs(page.childDate).format("YYYY-MM-DD")}</p>
+            </div>
+          )}
+          <div className="title">
+            {values.pageType === "todo" && <input type="checkbox" />}
+            <input
+              type="text"
+              name="title"
+              value={values.title}
+              onChange={onChange}
+              placeholder="TITLE"
+              className="titleInput"
+              required
+            />
+          </div>
+
+          <div className="childCell">
+            ㄴ
+            {childList.map((page, i) => (
+              <div className="childList" key={i}>
+                <p>{page.childTitle}</p>
+                <input
+                  type="checkbox"
+                  checked={childList.some(
+                    ({ childId }) => childId === page.childId
+                  )}
+                  onChange={(e) => {
+                    addChild(
+                      e.target.checked,
+                      page.childTitle,
+                      page.childDate,
+                      page.childId
+                    );
+                  }}
+                />
+              </div>
+            ))}
+            <input
+              className="childSearch"
+              type="search"
+              name=""
+              value={childTitle}
+              onChange={(e) => setChildTitle(e.target.value)}
+              placeholder="  Add +"
+            />
+          </div>
+
+          {childPageList.length !== 0 && (
+            <div className="childPageList">
+              {childPageList.map((page, i) => (
+                <div className="childList" key={i}>
+                  <p>{page.title}</p>
                   <input
                     type="checkbox"
                     checked={childList.some(
-                      ({ childId }) => childId === page.childId
+                      ({ childId }) => childId === page.id
                     )}
+                    name={page.id}
                     onChange={(e) => {
                       addChild(
                         e.target.checked,
-                        page.childTitle,
-                        page.childDate,
-                        page.childId
+                        page.title,
+                        page.date,
+                        page.id
                       );
                     }}
                   />
@@ -191,84 +228,68 @@ export default function PageModal() {
               ))}
             </div>
           )}
-          {prntList.length === 0 && <p>Select Parent</p>}
-          <input
-            type="search"
-            name=""
-            value={prntTitle}
-            onChange={(e) => setPrntTitle(e.target.value)}
-            placeholder="Search Parent"
-          />
-          {prntPageList.map((page, i) => (
-            <div className="pageCell" key={i}>
-              <p>{page.title}</p>
-              <p>{dayjs(page.date).format("YYYY-MM-DD")}</p>
-              <input
-                type="checkbox"
-                checked={prntList.some(({ parentId }) => parentId === page.id)}
-                name={page.id}
-                onChange={(e) => {
-                  addPrnt(e.target.checked, page.title, page.date, page.id);
-                }}
-              />
-            </div>
-          ))}
-
-          {childList.length === 0 && <p>Select Child</p>}
-          <input
-            type="search"
-            name=""
-            value={childTitle}
-            onChange={(e) => setChildTitle(e.target.value)}
-            placeholder="Search Child"
-          />
-          {childPageList.map((page, i) => (
-            <div className="pageCell" key={i}>
-              <p>{page.title}</p>
-              <p>{dayjs(page.date).format("YYYY-MM-DD")}</p>
-              <input
-                type="checkbox"
-                checked={childList.some(({ childId }) => childId === page.id)}
-                name={page.id}
-                onChange={(e) => {
-                  addChild(e.target.checked, page.title, page.date, page.id);
-                }}
-              />
-            </div>
-          ))}
-
-          <div className="pageContent">
-            <h4>contents</h4>
+          <div className="when">
             <input
-              type="text"
-              name="text"
-              value={values.text}
-              onChange={onChange}
-              placeholder="Add Text"
-              className="textInput"
+              type="date"
+              name="date"
+              value={pageDate}
+              className="dateInput"
+              onChange={(e) => setPageDate(e.target.value)}
             />
+            {isCheckedTime && (
+              <input
+                type="time"
+                name=""
+                value={pageTime}
+                onChange={(e) => setPageTime(e.target.value)}
+                className="listTime"
+              />
+            )}
+            <label className="checkTime">
+              <input
+                type="checkbox"
+                checked={isCheckedTime}
+                onChange={(e) => setIsCheckedTime(e.target.checked)}
+              />
+              time
+            </label>
           </div>
-          <label>
-            <input
-              type="radio"
-              name="pageType"
-              value="page"
-              onChange={onChange}
-              defaultChecked
-            />
-            page
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="pageType"
-              value="todo"
-              onChange={onChange}
-            />
-            todo
-          </label>
+
+          <textarea
+            type="text"
+            name="text"
+            value={values.text}
+            onChange={onChange}
+            placeholder="Contents..."
+            className="textInput"
+          />
         </main>
-        <button type="submit">submit</button>
+        <footer>
+          <div className="PageTodoType">
+            <label>
+              <input
+                type="radio"
+                name="pageType"
+                value="page"
+                onChange={onChange}
+                defaultChecked
+              />
+              Page
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="pageType"
+                value="todo"
+                onChange={onChange}
+              />
+              Todo
+            </label>
+          </div>
+          <button id="save" type="submit">
+            SAVE
+          </button>
+        </footer>
       </form>
     </div>
   );

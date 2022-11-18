@@ -21,7 +21,7 @@ export default function Week() {
   const { user } = useContext(AuthContext);
   const userId = user?.id;
   const weekDays = ["SON", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-  let currentMonth = getMonth(monthIndex - 1);
+  let currentMonth = getMonth(yearIndex, monthIndex - 1);
   const [currentWeek, setCurrentWeek] = useState(currentMonth[weekIndex]);
   let currentDate = dayjs(new Date(yearIndex, monthIndex - 1));
   const navigate = useNavigate();
@@ -44,7 +44,7 @@ export default function Week() {
       yearIndex,
       monthIndex,
       weekIndex,
-      getMonth(monthIndex - 2)[6]
+      getMonth(yearIndex, monthIndex - 2)[6]
     );
   }
   function next_week() {
@@ -69,7 +69,7 @@ export default function Week() {
     <Fragment>
       <CalHeader
         mode="week"
-        prevWeekCount={getMonth(monthIndex - 2)[6]}
+        prevWeekCount={getMonth(yearIndex, monthIndex - 2)[6]}
         currentMonth={currentMonth}
       />
       <div className="cal_week_days">
