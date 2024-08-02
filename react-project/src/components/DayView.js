@@ -1,13 +1,10 @@
 import React from "react";
 import { Fragment, useContext } from "react";
 import GlobalContext from "../context/GlobalContext";
-import { AuthContext } from "../context/auth";
-import { useForm } from "../utils/hooks";
-import { useMutation } from "@apollo/react-hooks";
-import gql from "graphql-tag";
 import PageList from "./PageList";
 import { useNavigate, useParams } from "react-router-dom";
 import "../static/DayView.css";
+import BasicBtn from "./BasicBtn";
 
 function DayView() {
   const { dayViewDate, setModalObj } = useContext(GlobalContext);
@@ -17,23 +14,25 @@ function DayView() {
     <Fragment>
       <div className="cal_day_header">
         <h2>{dayViewDate.format("YYYY MMM DD")}</h2>
-        <button
-          onClick={() =>
-            setModalObj({
-              date: dayViewDate.format("YYYY-MM-DD"),
-              type: "page",
-            })
-          }
-        >
-          +
-        </button>
-        <button
-          onClick={() =>
-            navigation(`/week/${params.year}/${params.month}/${params.week}`)
-          }
-        >
-          back
-        </button>
+        <div style={{ display: "flex" }}>
+          <BasicBtn
+            onClick={() =>
+              setModalObj({
+                date: dayViewDate.format("YYYY-MM-DD"),
+                type: "page",
+              })
+            }
+          >
+            +
+          </BasicBtn>
+          <BasicBtn
+            onClick={() =>
+              navigation(`/week/${params.year}/${params.month}/${params.week}`)
+            }
+          >
+            back
+          </BasicBtn>
+        </div>
       </div>
       <div className="cal_day_body">
         <PageList pageDate={dayViewDate} />

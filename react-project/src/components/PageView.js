@@ -1,4 +1,3 @@
-import folderIcon from "../static/folder.jpeg";
 import "../static/PageModal.css";
 import GlobalContext from "../context/GlobalContext";
 import { useQuery } from "@apollo/client";
@@ -134,7 +133,7 @@ export default function PageView() {
         </header>
         <main>
           <div className="prntCell">
-            <img src={folderIcon} />
+            <img src={process.env.PUBLIC_URL + "/img/folder.jpeg"} />
             {prntList.map((page, i) => (
               <div className="prntList" key={i}>
                 <p>{page.parentTitle}</p>

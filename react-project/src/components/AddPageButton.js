@@ -1,4 +1,3 @@
-import "../static/Main.css";
 import { useContext } from "react";
 import GlobalContext from "../context/GlobalContext";
 

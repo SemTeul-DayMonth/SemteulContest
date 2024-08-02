@@ -3,9 +3,13 @@
     "concurrently": "^7.5.0"
   },
   "scripts": {
-    "backend": "nodemon node-server/index",
+    "start": "concurrently \"npm run backend\" \"npm run start --prefix react-project\"",
+    "backend": "nodemon node-server/server",
     "dev": "concurrently \"npm run backend\" \"npm run start --prefix react-project\"",
     "install-client": "cd react-project && npm install",
     "install-server": "cd node-server && npm install"
+  },
+  "dependencies": {
+    "nginx": "^1.0.8"
   }
 }

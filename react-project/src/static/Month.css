@@ -29,7 +29,6 @@
 }
 
 .cal .year {
-  font-family: "Distant Galaxy", sans-serif;
   font-size: 20px;
   margin-bottom: 15px;
   -webkit-transform: scale(1, 1.2);
@@ -38,7 +37,6 @@
   display: flex;
   margin: 0;
   justify-content: center;
-  font-family: "Distant Galaxy", sans-serif;
   color: #ffffff;
   font-size: 30px;
   background-color: #7b417b;
@@ -46,6 +44,7 @@
   height: 2.5rem;
   align-items: center;
   border-radius: 1em;
+  font-family: "Arimo";
 }
 
 .cal_month {

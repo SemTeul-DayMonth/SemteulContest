@@ -4,6 +4,7 @@ import PageList from "./PageList";
 import { useContext } from "react";
 import GlobalContext from "../context/GlobalContext";
 import { useNavigate } from "react-router-dom";
+import BasicBtn from "./BasicBtn";
 
 export default function SideTodo() {
   const { pageMode, setModalObj } = useContext(GlobalContext);
@@ -15,7 +16,7 @@ export default function SideTodo() {
         Today's {pageMode === "page" ? "Page" : "Todo"} List
       </div>
       <PageList pageDate={dayjs().format("YYYY-MM-DD")} />
-      <button onClick={() => navigate("/repo/")}>Repository</button>
+      <BasicBtn onClick={() => navigate("/repo/")}>Repository</BasicBtn>
       <div onClick={() => setModalObj({ type: "page" })} className="addEvtBtn">
         +
       </div>

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 
-import { AuthProvider, AuthContext } from "./context/auth";
+import { AuthProvider } from "./context/auth";
 import ContextWrapper from "./context/ContextWrapper";
 
 import Main from "./pages/Main";
@@ -9,9 +9,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 
 import "./static/index.css";
+import "./static/module.css";
 function App() {
-  const { user } = useContext(AuthContext);
-
   return (
     <ContextWrapper>
       <AuthProvider>
