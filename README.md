@@ -1,7 +1,11 @@
 # SemteulContest
+<p align="center">
+<img src="https://github.com/user-attachments/assets/26d8adc7-5763-4eea-9bd6-87cab4d85c2b" />
+</p>
+
 
 <h3>FRONT</h3>
-김혜주 이수연
+시아진 김혜주 이수연
 <br>
 <br>
 <h3>BACK</h3>
@@ -41,4 +45,4 @@
 
 # 기간
 
-<h3>7/19 ~ 8/31</h3>
+<h3>2022/7/19 ~ 2022/8/31</h3>
