@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/SemteulContest/static/css/main.42523d67.css",
+    "main.js": "/SemteulContest/static/js/main.f25c1e8b.js",
+    "index.html": "/SemteulContest/index.html",
+    "main.42523d67.css.map": "/SemteulContest/static/css/main.42523d67.css.map",
+    "main.f25c1e8b.js.map": "/SemteulContest/static/js/main.f25c1e8b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.42523d67.css",
+    "static/js/main.f25c1e8b.js"
+  ]
+}
